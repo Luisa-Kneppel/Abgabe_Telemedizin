@@ -1,0 +1,2549 @@
+[
+  {
+    "patient_id": 1,
+    "tage": [
+      {
+        "datum": "2026-06-14",
+        "messwerte": [
+          {"uhrzeit": "00:00", "temperatur": 36.4},
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-15",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-16",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.5
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-17",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-18",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "patient_id": 2,
+    "tage": [
+      {
+        "datum": "2026-06-14",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-15",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-16",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-17",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-18",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "patient_id": 3,
+    "tage": [
+      {
+        "datum": "2026-06-14",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.6
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-15",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.1
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-16",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 37.7
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.9
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.9
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 38.0
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 38.1
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 38.2
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 38.1
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 38.2
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 38.2
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 38.1
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 38.0
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 38.0
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 38.0
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.9
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.9
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.7
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-17",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 38.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 38.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 38.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 38.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 38.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 38.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 38.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 38.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 38.8
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 38.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 38.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 38.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 38.4
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-18",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 38.5
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 38.8
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 38.9
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 38.9
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 38.9
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 39.0
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 38.8
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 38.9
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 38.7
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 38.6
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 38.6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "patient_id": 4,
+    "tage": [
+      {
+        "datum": "2026-06-14",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-15",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.1
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-16",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-17",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.1
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-18",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "patient_id": 5,
+    "tage": [
+      {
+        "datum": "2026-06-14",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.3
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-15",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.6
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.8
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.1
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-16",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.1
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.2
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.3
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.2
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-17",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 37.0
+          }
+        ]
+      },
+      {
+        "datum": "2026-06-18",
+        "messwerte": [
+          {
+            "uhrzeit": "00:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "01:00",
+            "temperatur": 36.6
+          },
+          {
+            "uhrzeit": "02:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "03:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "04:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "05:00",
+            "temperatur": 36.4
+          },
+          {
+            "uhrzeit": "06:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "07:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "08:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "09:00",
+            "temperatur": 37.0
+          },
+          {
+            "uhrzeit": "10:00",
+            "temperatur": 37.4
+          },
+          {
+            "uhrzeit": "11:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "12:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "13:00",
+            "temperatur": 37.3
+          },
+          {
+            "uhrzeit": "14:00",
+            "temperatur": 37.5
+          },
+          {
+            "uhrzeit": "15:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "16:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "17:00",
+            "temperatur": 37.2
+          },
+          {
+            "uhrzeit": "18:00",
+            "temperatur": 36.8
+          },
+          {
+            "uhrzeit": "19:00",
+            "temperatur": 37.1
+          },
+          {
+            "uhrzeit": "20:00",
+            "temperatur": 36.9
+          },
+          {
+            "uhrzeit": "21:00",
+            "temperatur": 36.5
+          },
+          {
+            "uhrzeit": "22:00",
+            "temperatur": 36.7
+          },
+          {
+            "uhrzeit": "23:00",
+            "temperatur": 36.5
+          }
+        ]
+      }
+    ]
+  }
+]

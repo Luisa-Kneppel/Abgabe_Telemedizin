@@ -1,0 +1,28 @@
+[
+  {
+    "patient_id": 1,
+    "beschreibung": "Patient 1: vollkommen gesund, medizinisch plausibler Temperaturverlauf zwischen 36,3 und 36,9 °C.",
+    "temperatur_dateien": [
+      {
+        "datum": "2026-06-14",
+        "dateipfad": "data/koerpertemperatur/patient_1_2026-06-14.csv"
+      },
+      {
+        "datum": "2026-06-15",
+        "dateipfad": "data/koerpertemperatur/patient_1_2026-06-15.csv"
+      },
+      {
+        "datum": "2026-06-16",
+        "dateipfad": "data/koerpertemperatur/patient_1_2026-06-16.csv"
+      },
+      {
+        "datum": "2026-06-17",
+        "dateipfad": "data/koerpertemperatur/patient_1_2026-06-17.csv"
+      },
+      {
+        "datum": "2026-06-18",
+        "dateipfad": "data/koerpertemperatur/patient_1_2026-06-18.csv"
+      }
+    ]
+  }
+]
