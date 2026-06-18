@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "nachname": "Müller",
+    "vorname": "Marie",
+    "foto": "bilder/marie_mueller.jpg",
+    "geburtsdatum": "1985-04-17",
+    "telefon": "0171-1234567",
+    "adresse": {
+      "strasse": "Hauptstrasse 15",
+      "plz": "76131",
+      "ort": "Karlsruhe"
+    },
+    "medikamente": [
+      {
+        "name": "Ramipril",
+        "dosis": "5 mg",
+        "einnahme": "1-0-0"
+      }
+    ],
+    "diagnosen": ["Hypertonie"]
+  },
+  {
+    "id": 2,
+    "nachname": "Schmidt",
+    "vorname": "Anna",
+    "foto": "bilder/anna_schmidt.jpg",
+    "geburtsdatum": "1992-09-02",
+    "telefon": "0157-9876543",
+    "adresse": {
+      "strasse": "Bahnhofstrasse 8",
+      "plz": "70173",
+      "ort": "Stuttgart"
+    },
+    "medikamente": [
+      {
+        "name": "Ibuprofen",
+        "dosis": "400 mg",
+        "einnahme": "bei Bedarf"
+      }
+    ],
+    "diagnosen": ["Migräne"]
+  },
+  {
+    "id": 3,
+    "nachname": "Weber",
+    "vorname": "Lukas",
+    "foto": "bilder/lukas_weber.jpg",
+    "geburtsdatum": "1978-12-21",
+    "telefon": "0160-4567890",
+    "adresse": {
+      "strasse": "Gartenweg 3",
+      "plz": "68159",
+      "ort": "Mannheim"
+    },
+    "medikamente": [],
+    "diagnosen": ["keine bekannten Diagnosen"]
+  },
+  {
+    "id": 4,
+    "nachname": "Fischer",
+    "vorname": "Laura",
+    "foto": "bilder/laura_fischer.jpg",
+    "geburtsdatum": "2001-06-11",
+    "telefon": "0176-2345678",
+    "adresse": {
+      "strasse": "Rosenweg 22",
+      "plz": "69115",
+      "ort": "Heidelberg"
+    },
+    "medikamente": [
+      {
+        "name": "Cetirizin",
+        "dosis": "10 mg",
+        "einnahme": "0-0-1"
+      }
+    ],
+    "diagnosen": ["Allergie"]
+  },
+  {
+    "id": 5,
+    "nachname": "Keller",
+    "vorname": "Jonas",
+    "foto": "bilder/jonas_keller.jpg",
+    "geburtsdatum": "1969-03-30",
+    "telefon": "0151-3456789",
+    "adresse": {
+      "strasse": "Marktplatz 4",
+      "plz": "76133",
+      "ort": "Karlsruhe"
+    },
+    "medikamente": [
+      {
+        "name": "Metformin",
+        "dosis": "500 mg",
+        "einnahme": "1-0-1"
+      }
+    ],
+    "diagnosen": ["Diabetes mellitus Typ 2"]
+  }
+]
