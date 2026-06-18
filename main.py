@@ -7,7 +7,30 @@ import pandas as pd
 #st.header("Login")
 
 
-st.set_page_config(page_title="Patientenverwaltung")
+st.set_page_config(
+    page_title="Patientenverwaltung",
+    layout="wide"
+)
+
+with st.sidebar:
+    st.image("data/pictures/Logo.png", width=150)
+
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+
+
+    st.markdown("""
+    ### Musterpraxis
+
+    Hauptstraße 15  
+    76131 Karlsruhe
+
+    ☎ 0721 123456
+    """)
 
 st.title("Patientenverwaltung")
 
