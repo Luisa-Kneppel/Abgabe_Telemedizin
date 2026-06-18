@@ -3,7 +3,7 @@ import json
 
 def load_person_data():
     """Lädt die Patientendaten aus der JSON-Datei."""
-    with open("data/patienten.json", "r", encoding="utf-8") as file:
+    with open("data/patienten_daten.json", "r", encoding="utf-8") as file:
         person_data = json.load(file)
 
     return person_data

@@ -47,3 +47,24 @@ with col2:
     if st.button("Patient", use_container_width=True):
         st.session_state["rolle"] = "patient"
         st.switch_page("pages/patient.py")
+
+
+
+
+
+from read_data import load_person_data, get_person_list
+from patienten import get_person_object_by_full_name
+
+patienten_data = load_person_data(person_data_path="data/patienten_daten.json")
+person_names = get_person_list(patienten_data)
+
+selected_person = st.selectbox("Patient:in auswählen", person_names)
+
+patient = get_person_object_by_full_name(selected_person)
+
+st.write(patient.get_full_name())
+st.write(patient.calc_age())
+st.write(patient.telefon)
+st.write(patient.get_adresse_as_string())
+st.write(patient.get_diagnosen_as_string())
+st.write(patient.get_medikamente_as_string())
