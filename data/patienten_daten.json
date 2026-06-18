@@ -3,7 +3,7 @@
     "id": 1,
     "nachname": "Müller",
     "vorname": "Marie",
-    "foto": "bilder/marie_mueller.jpg",
+    "foto": "data/pictures/Mueller_Marie.png",
     "geburtsdatum": "1985-04-17",
     "telefon": "0171-1234567",
     "adresse": {
@@ -24,7 +24,7 @@
     "id": 2,
     "nachname": "Schmidt",
     "vorname": "Anna",
-    "foto": "bilder/anna_schmidt.jpg",
+    "foto": "data/pictures/Schmidt_Anna.png",
     "geburtsdatum": "1992-09-02",
     "telefon": "0157-9876543",
     "adresse": {
@@ -45,7 +45,7 @@
     "id": 3,
     "nachname": "Weber",
     "vorname": "Lukas",
-    "foto": "bilder/lukas_weber.jpg",
+    "foto": "data/pictures/Weber_Lukas.png",
     "geburtsdatum": "1978-12-21",
     "telefon": "0160-4567890",
     "adresse": {
@@ -60,7 +60,7 @@
     "id": 4,
     "nachname": "Fischer",
     "vorname": "Laura",
-    "foto": "bilder/laura_fischer.jpg",
+    "foto": "data/pictures/Fischer_Laura.png",
     "geburtsdatum": "2001-06-11",
     "telefon": "0176-2345678",
     "adresse": {
@@ -81,7 +81,7 @@
     "id": 5,
     "nachname": "Keller",
     "vorname": "Jonas",
-    "foto": "bilder/jonas_keller.jpg",
+    "foto": "data/pictures/Keller_Jonas.png",
     "geburtsdatum": "1969-03-30",
     "telefon": "0151-3456789",
     "adresse": {
