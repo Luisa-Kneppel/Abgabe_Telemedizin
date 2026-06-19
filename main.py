@@ -2,6 +2,10 @@ import streamlit as st
 import plotly.express as px
 import numpy as np
 import pandas as pd
+from read_data import load_person_data, get_person_list
+from patienten import get_person_object_by_full_name
+from arzt import anzeige
+
 
 #st.write("# ")
 #st.header("Login")
@@ -38,19 +42,43 @@ st.write("Bitte wählen Sie Ihre Rolle:")
 
 col1, col2 = st.columns(2)
 
+# with col1:
+#     if st.button("Arzt", use_container_width=True):
+#         st.session_state["rolle"] = "Arzt"
+#         st.switch_page("arzt.py")
+
+# with col2:
+#     if st.button("Patient", use_container_width=True):
+#         st.session_state["rolle"] = "Patient"
+#         st.switch_page("patient.py")
+
+
+
+# if col1.button("Arzt", use_container_width=True):
+#     st.session_state["rolle"] = "arzt"
+#     st.switch_page("arzt.py")
+
+
+if "rolle" not in st.session_state:
+    st.session_state.rolle = None
+
 with col1:
     if st.button("Arzt", use_container_width=True):
         st.session_state["rolle"] = "arzt"
-        st.switch_page("pages/arzt.py")
 
 with col2:
     if st.button("Patient", use_container_width=True):
         st.session_state["rolle"] = "patient"
-        st.switch_page("pages/patient.py")
 
+if st.session_state.rolle == "arzt":
+    patienten_data = load_person_data()
+    person_names = get_person_list(patienten_data)
+    selected_person = st.selectbox("Patient:in auswählen", person_names)
 
+    patient = get_person_object_by_full_name(selected_person)
 
-if col1.button("Arzt", use_container_width=True):
-    st.session_state["rolle"] = "arzt"
-    st.switch_page("pages/arzt.py")
-
+    anzeige(patient)
+    
+elif st.session_state.rolle == "patient":
+    #show_patient()
+    pass
