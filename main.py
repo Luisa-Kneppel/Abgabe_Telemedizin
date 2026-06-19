@@ -26,7 +26,7 @@ with st.sidebar:
     st.markdown("""
     ### Musterpraxis
 
-    Hauptstraße 15  
+    Hauptstraße 15
     76131 Karlsruhe
 
     ☎ 0721 123456
