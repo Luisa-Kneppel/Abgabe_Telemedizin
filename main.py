@@ -71,13 +71,7 @@ with col2:
         st.session_state["rolle"] = "patient"
 
 if st.session_state.rolle == "arzt":
-    patienten_data = load_person_data()
-    person_names = get_person_list(patienten_data)
-    selected_person = st.selectbox("Patient:in auswählen", person_names)
-
-    patient = get_person_object_by_full_name(selected_person)
-
-    anzeige(patient)
+    anzeige()
     
 elif st.session_state.rolle == "patient":
     #show_patient()

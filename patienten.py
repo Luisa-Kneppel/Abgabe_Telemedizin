@@ -46,7 +46,6 @@ def get_person_object_by_full_name(full_name):
 
     return None
 
-
 class Person:
 
     def __init__(
