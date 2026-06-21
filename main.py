@@ -10,7 +10,6 @@ from arzt import anzeige
 #st.write("# ")
 #st.header("Login")
 
-
 st.set_page_config(
     page_title="Patientenverwaltung",
     layout="wide"
@@ -25,7 +24,6 @@ with st.sidebar:
     st.write("")
     st.write("")
     st.write("")
-
 
     st.markdown("""
     ### Musterpraxis
