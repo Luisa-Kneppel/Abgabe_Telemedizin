@@ -17,13 +17,8 @@ st.set_page_config(
 
 with st.sidebar:
     st.image("data/pictures/Logo.png", width=150)
-
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
+    for i in range(20):
+        st.write("")
 
     st.markdown("""
     ### Musterpraxis
@@ -42,22 +37,24 @@ if "rolle" not in st.session_state:
 
 if st.session_state.rolle is None: 
 
-    st.title("Patientenverwaltung")
-    st.write("Bitte wählen Sie Ihre Rolle:")
-    st.write(" ")   # Abstand
+ 
+    left, center, right = st.columns([2, 3, 2]) # damit der Text mittig steht
+    with center:
+        st.header("Patientenverwaltung")
+        st.write(" ")   # Abstand
 
-    left_space, col1, col2, right_space = st.columns([1.5, 2, 2, 1.5])  # damit die Seitenaufteilung besser ist, die beiden Äußeren bleiben leer.
+        st.write("Bitte wählen Sie Ihre Rolle:")
+        st.write(" ")
 
+        col1, col2 = st.columns(2)
 
+        with col1:
+            if st.button("Arzt", use_container_width=True):
+                st.session_state["rolle"] = "arzt"
 
-
-    with col1:
-        if st.button("Arzt", use_container_width=True):
-            st.session_state["rolle"] = "arzt"
-
-    with col2:
-        if st.button("Patient", use_container_width=True):
-            st.session_state["rolle"] = "patient"
+        with col2:
+            if st.button("Patient", use_container_width=True):
+                st.session_state["rolle"] = "patient"
 else:
     if st.session_state.rolle == "arzt":
         anzeige()
