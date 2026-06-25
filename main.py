@@ -23,8 +23,8 @@ with st.sidebar:
     st.markdown("""
     ### Musterpraxis
 
-    Hauptstraße 15
-    76131 Karlsruhe
+    Maximilianstraße 2
+    6020 Innsbruck
 
     ☎ 0721 123456
     """)
