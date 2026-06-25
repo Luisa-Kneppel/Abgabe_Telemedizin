@@ -13,7 +13,7 @@ from arzt import anzeige
 st.set_page_config(
     page_title="Patientenverwaltung",
     layout="wide"
-)
+    )
 
 with st.sidebar:
     st.image("data/pictures/Logo.png", width=150)
@@ -34,43 +34,34 @@ with st.sidebar:
     ☎ 0721 123456
     """)
 
-st.title("Patientenverwaltung")
-
-st.write("Bitte wählen Sie Ihre Rolle:")
-
-col1, col2 = st.columns(2)
-
-# with col1:
-#     if st.button("Arzt", use_container_width=True):
-#         st.session_state["rolle"] = "Arzt"
-#         st.switch_page("arzt.py")
-
-# with col2:
-#     if st.button("Patient", use_container_width=True):
-#         st.session_state["rolle"] = "Patient"
-#         st.switch_page("patient.py")
-
-
-
-# if col1.button("Arzt", use_container_width=True):
-#     st.session_state["rolle"] = "arzt"
-#     st.switch_page("arzt.py")
-
-
 if "rolle" not in st.session_state:
     st.session_state.rolle = None
 
-with col1:
-    if st.button("Arzt", use_container_width=True):
-        st.session_state["rolle"] = "arzt"
+# damit die Auswahlmöglichkeiten nicht immer aufscheinen müssen wir eine 
+# if Bedingung einführen, damit es nur aufscheint, wenn noch nichts gewählt wurde!
 
-with col2:
-    if st.button("Patient", use_container_width=True):
-        st.session_state["rolle"] = "patient"
+if st.session_state.rolle is None: 
 
-if st.session_state.rolle == "arzt":
-    anzeige()
+    st.title("Patientenverwaltung")
+    st.write("Bitte wählen Sie Ihre Rolle:")
+    st.write(" ")   # Abstand
+
+    left_space, col1, col2, right_space = st.columns([1.5, 2, 2, 1.5])  # damit die Seitenaufteilung besser ist, die beiden Äußeren bleiben leer.
+
+
+
+
+    with col1:
+        if st.button("Arzt", use_container_width=True):
+            st.session_state["rolle"] = "arzt"
+
+    with col2:
+        if st.button("Patient", use_container_width=True):
+            st.session_state["rolle"] = "patient"
+else:
+    if st.session_state.rolle == "arzt":
+        anzeige()
     
-elif st.session_state.rolle == "patient":
-    #show_patient()
-    pass
+    elif st.session_state.rolle == "patient":
+        #show_patient()
+        pass
