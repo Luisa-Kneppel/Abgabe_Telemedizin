@@ -1,50 +1,7 @@
 from PIL import Image
+from read_data import load_person_data, get_person_list
+import streamlit as st
 
-from read_data import load_person_data
-
-
-def get_person_data():
-    """
-    Lädt alle Personen aus der JSON-Datei
-    und wandelt sie in Person-Objekte um.
-    """
-    person_data = load_person_data()
-
-    person_object_list = []
-
-    for person_dict in person_data:
-        person_object = Person(
-            person_dict["id"],
-            person_dict["geburtsdatum"],
-            person_dict["vorname"],
-            person_dict["nachname"],
-            person_dict["foto"],
-            person_dict["telefon"],
-            person_dict["adresse"],
-            person_dict["medikamente"],
-            person_dict["diagnosen"]
-        )
-
-        person_object_list.append(person_object)
-
-    return person_object_list
-
-
-def get_person_object_by_full_name(full_name):
-    """
-    Übergabe: 'Nachname, Vorname'
-    Rückgabe: passendes Person-Objekt
-    """
-    persons = get_person_data()
-
-    firstname = full_name.split(", ")[1]
-    lastname = full_name.split(", ")[0]
-
-    for person in persons:
-        if person.vorname == firstname and person.nachname == lastname:
-            return person
-
-    return None
 
 class Person:
 
@@ -114,3 +71,77 @@ class Person:
             )
 
         return ", ".join(medikamente_liste)
+
+def get_person_data():
+    """
+    Lädt alle Personen aus der JSON-Datei
+    und wandelt sie in Person-Objekte um.
+    """
+    person_data = load_person_data()
+
+    person_object_list = []
+
+    for person_dict in person_data:
+        person_object = Person(
+            person_dict["id"],
+            person_dict["geburtsdatum"],
+            person_dict["vorname"],
+            person_dict["nachname"],
+            person_dict["foto"],
+            person_dict["telefon"],
+            person_dict["adresse"],
+            person_dict["medikamente"],
+            person_dict["diagnosen"]
+        )
+
+        person_object_list.append(person_object)
+
+    return person_object_list
+
+
+def get_person_object_by_full_name(full_name):
+    """
+    Übergabe: 'Nachname, Vorname'
+    Rückgabe: passendes Person-Objekt
+    """
+    persons = get_person_data()
+
+    firstname = full_name.split(", ")[1]
+    lastname = full_name.split(", ")[0]
+
+    for person in persons:
+        if person.vorname == firstname and person.nachname == lastname:
+            return person
+
+    return None
+
+
+    
+def show_patient():
+    """
+    Zeigt die Informationen des Patienten an.
+    """
+    patienten_data = load_person_data()
+    person_names = get_person_list(patienten_data)
+
+    selected_person = st.selectbox("Patient:in auswählen", person_names)
+
+    patient = get_person_object_by_full_name(selected_person)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        
+        st.image(patient.foto, width = 120) 
+
+    with col2:
+        st.write("Name: " + patient.get_full_name())
+        st.write("Alter: " + str(patient.calc_age()))
+        st.write("Telefon: " + patient.telefon)
+        st.write("Adresse: " + patient.get_adresse_as_string())
+        st.write("Diagnosen: " + patient.get_diagnosen_as_string())
+        st.write("Medikamente: " + patient.get_medikamente_as_string())
+
+
+
+
+    

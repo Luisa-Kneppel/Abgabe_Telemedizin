@@ -5,6 +5,7 @@ import pandas as pd
 from read_data import load_person_data, get_person_list
 from patienten import get_person_object_by_full_name
 from arzt import anzeige
+from patienten import show_patient
 
 
 #st.write("# ")
@@ -17,6 +18,7 @@ st.set_page_config(
 
 with st.sidebar:
     st.image("data/pictures/Logo.png", width=150)
+
     for i in range(20):
         st.write("")
 
@@ -60,5 +62,11 @@ else:
         anzeige()
     
     elif st.session_state.rolle == "patient":
-        #show_patient()
-        pass
+        st.write("Patientenbereich")
+        show_patient() 
+
+        
+
+    
+
+
