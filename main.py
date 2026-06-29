@@ -2,14 +2,10 @@ import streamlit as st
 import plotly.express as px
 import numpy as np
 import pandas as pd
-# from read_data import load_person_data, get_person_list
-# from patienten import get_person_object_by_full_name
 from arzt import anzeige_arzt
 from patienten import show_patient
-
-
-#st.write("# ")
-#st.header("Login")
+from login import login
+from read_data import load_user_data
 
 st.set_page_config(
     page_title="Patientenverwaltung",
@@ -19,7 +15,12 @@ st.set_page_config(
 with st.sidebar:
     st.image("data/pictures/Logo.png", width=150)
 
-    for i in range(20):
+    if st.session_state.get("logged_in"):
+        if st.button("Logout"):
+            st.session_state.clear()
+            st.rerun()
+
+    for i in range(18):
         st.write("")
 
     st.markdown("""
@@ -31,42 +32,60 @@ with st.sidebar:
     ☎ 0721 123456
     """)
 
+# # damit die Auswahlmöglichkeiten nicht immer aufscheinen müssen wir eine 
+# # if Bedingung einführen, damit es nur aufscheint, wenn noch nichts gewählt wurde!
+
 if "rolle" not in st.session_state:
     st.session_state.rolle = None
 
-# damit die Auswahlmöglichkeiten nicht immer aufscheinen müssen wir eine 
-# if Bedingung einführen, damit es nur aufscheint, wenn noch nichts gewählt wurde!
+if st.session_state.rolle is None:
 
-if st.session_state.rolle is None: 
+    left, center, right = st.columns([1.5,4,1.5])
 
- 
-    left, center, right = st.columns([2, 3, 2]) # damit der Text mittig steht
     with center:
+
         st.header("Patientenverwaltung")
-        st.write(" ")   # Abstand
+
+        st.write("")
 
         st.write("Bitte wählen Sie Ihre Rolle:")
-        st.write(" ")
+
+        st.write("")
 
         col1, col2 = st.columns(2)
 
         with col1:
             if st.button("Arzt", use_container_width=True):
-                st.session_state["rolle"] = "arzt"
+                st.session_state.rolle = "arzt"
+                st.rerun()
 
         with col2:
             if st.button("Patient", use_container_width=True):
-                st.session_state["rolle"] = "patient"
-else:
-    if st.session_state.rolle == "arzt":
-        anzeige_arzt()
-    
-    elif st.session_state.rolle == "patient":
-        st.write("Patientenbereich")
-        show_patient() 
+                st.session_state.rolle = "patient"
+                st.rerun()
 
-        
+    st.stop()
 
-    
+login()
 
+if not st.session_state.get("logged_in"):
+    st.stop()
 
+username = st.session_state["username"]
+
+users = load_user_data()
+
+current_user = None
+
+for user in users:
+    if (user["username"] == username
+    and user["rolle"] == st.session_state.rolle
+        ):
+        current_user = user
+        break
+
+if current_user["rolle"] == "arzt":
+    anzeige_arzt()
+
+elif current_user["rolle"] == "patient":
+    show_patient(current_user["patient_id"])

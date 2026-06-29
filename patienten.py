@@ -117,16 +117,21 @@ def get_person_object_by_full_name(full_name):
 
 
     
-def show_patient():
+def show_patient(patient_id):
     """
     Zeigt die Informationen des Patienten an.
     """
-    patienten_data = load_person_data()
-    person_names = get_person_list(patienten_data)
+    persons = get_person_data()
+    patient = None
 
-    selected_person = st.selectbox("Patient:in auswählen", person_names)
+    for person in persons:
+        if person.id == patient_id:
+            patient = person
+            break
 
-    patient = get_person_object_by_full_name(selected_person)
+    if patient is None:
+        st.error("Patient wurde nicht gefunden.")
+        return
 
     col1, col2 = st.columns(2)
     with col1:

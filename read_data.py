@@ -8,6 +8,12 @@ def load_person_data(person_data_path="data/patienten_daten.json"):
 
     return person_data
 
+def load_user_data(user_data_path="data/user.json"):
+    """Lädt die Benutzerdaten aus der JSON-Datei."""
+    with open(user_data_path, "r", encoding="utf-8") as file:
+        user_data = json.load(file)
+
+    return user_data
 
 def get_person_list(person_data):
     """Gibt eine Liste aller Patientennamen im Format 'Nachname, Vorname' zurück."""
