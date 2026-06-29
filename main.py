@@ -2,8 +2,8 @@ import streamlit as st
 import plotly.express as px
 import numpy as np
 import pandas as pd
-from read_data import load_person_data, get_person_list
-from patienten import get_person_object_by_full_name
+# from read_data import load_person_data, get_person_list
+# from patienten import get_person_object_by_full_name
 from arzt import anzeige
 from patienten import show_patient
 
