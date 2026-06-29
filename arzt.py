@@ -5,7 +5,7 @@ import streamlit as st
 
 
 
-def anzeige():
+def anzeige_arzt():
 
     patienten_data = load_person_data()
     person_names = get_person_list(patienten_data)

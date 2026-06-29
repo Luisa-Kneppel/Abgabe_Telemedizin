@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 # from read_data import load_person_data, get_person_list
 # from patienten import get_person_object_by_full_name
-from arzt import anzeige
+from arzt import anzeige_arzt
 from patienten import show_patient
 
 
@@ -59,7 +59,7 @@ if st.session_state.rolle is None:
                 st.session_state["rolle"] = "patient"
 else:
     if st.session_state.rolle == "arzt":
-        anzeige()
+        anzeige_arzt()
     
     elif st.session_state.rolle == "patient":
         st.write("Patientenbereich")
