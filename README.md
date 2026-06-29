@@ -10,7 +10,7 @@ Funktionen:
 Nebenmodul arzt.py:
 In diesem Modul wird das Ärzte Dashboard erstellt, sodass es später im main.py nur mehr aufgerufen werden muss.
 Zuerst werden die Funktionen load_person_data, get_person_list aus read_data; get_person_object_by_full_name aus patienten.py und streamlit importiert.
-Daraufhin haben wir die Funktion anzeige() erstellt, durch diese Funktion kann nahcher das Ärzte Dashboard aufgerufen werden. 
+Daraufhin haben wir die Funktion anzeige_arzt() erstellt, durch diese Funktion kann nahcher das Ärzte Dashboard aufgerufen werden. 
 Im ersten Schritt laden wir die Patientendaten sowie die Liste der Personennamen ein.
 Durch ein Dropdown können die verschiedenen Patienten ausgewählt werden, je nach Auswahl werden die jeweiligen Daten angezeigt. Um es übersichtlicher zu gestalten, haben wir uns dazu entschlossen, mit zwei Spalten zu arbeiten, in der einen Spalte wird das Patientenfoto, in der anderen die Patientendaten angezeigt.
 
