@@ -1,8 +1,10 @@
+import json
+import pandas as pd
+import plotly.express as px 
+import streamlit as st
 from read_data import load_person_data, get_person_list
 from patienten import get_person_object_by_full_name
 import streamlit as st
-
-
 
 
 def anzeige_arzt():
@@ -17,13 +19,144 @@ def anzeige_arzt():
     col1, col2 = st.columns(2)
     with col1:
 
-        st.image(patient.foto) #, width=120)
+        st.image(patient.foto, width=180)
 
     with col2:
+        # ? wo müsste das hin? st.subheader("Patientendaten")
         st.write("Name: " + patient.get_full_name())
         st.write("Alter: " + str(patient.calc_age()))
         st.write("Telefon: " + patient.telefon)
         st.write("Adresse: " + patient.get_adresse_as_string())
         st.write("Diagnosen: " + patient.get_diagnosen_as_string())
         st.write("Medikamente: " + patient.get_medikamente_as_string())
+    
+    st.divider() #horizontale Trennlinie 
+    
 
+    show_temp_auswertung(patient.id)
+
+
+def load_temp_messdaten ():
+    # wir lesen die Daten aus der json Datei ein (diese hat Zugriff auf die csv)
+    with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
+        temp_messdaten = json.load(file)
+
+    return temp_messdaten
+
+def get_temp_messdaten_by_id(patienten_id):
+    # hier suchen wir alle Temp Messdaten, die zu einer bestimmten ID gehören
+    temp_messdaten = load_temp_messdaten()
+
+    temp_liste = []
+
+    for messung in temp_messdaten:
+        if messung["patient_id"] == patienten_id and messung["typ"] == "koerpertemperatur":
+            temp_liste.append(messung)
+
+    return temp_liste 
+
+def load_temp_csv(dateipfad):
+    #lädt die einzelnen csv dateien, teilt ordner ab nur noch Pfad
+    full_path = "data/" + dateipfad
+    df_temp = pd.read_csv(full_path) #hier df mit den Daten anlegen
+
+    return df_temp
+
+def temp_summary(temp_liste):
+    # wir brauchen für den Trend die wichitgsten Daten der einzelnen Tage
+    # diese Daten erstellen wir hier aus der temp_liste um es später zu plotten
+
+    summary_liste = []
+
+    for messung in temp_liste:
+        df_temp = load_temp_csv(messung["dateipfad"])
+
+        durchschnitt = df_temp["temperatur"].mean()
+        minimum = df_temp["temperatur"].min()
+        maximum = df_temp["temperatur"].max()
+
+        summary_liste.append({
+            "Datum": messung["datum"],
+            "Durchschnitt" :round(durchschnitt, 2),
+            "Minimum": minimum,
+            "Maximum": maximum
+        })
+    df_summary = pd.DataFrame(summary_liste)
+
+    return df_summary
+
+def plot_temp_summary(df_summary):
+    fig = px.line(
+        df_summary,
+        x="Datum",
+        y=["Durchschnitt", "Minimum", "Maximum"],
+        title="Temperaturverlauf",
+        markers=True
+    )
+
+    fig.update_layout(
+        xaxis_title="Datum",
+        yaxis_title="Temperatur in °C"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+def plot_temp_ein_tag(df_temp, datum):
+    # einen Tag plotten mit 1 Wert/h
+    fig = px.line(
+        df_temp,
+        x="uhrzeit",
+        y="temperatur",
+        title="Temperaturverlauf am " + datum,
+        markers=True
+    )
+
+    fig.update_layout(
+        xaxis_title="Uhrzeit",
+        yaxis_title="Temperatur in °C"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+def show_temp_tag_auswahl(temp_liste):
+    # Auswahlbox um einen der letzten 5 Tage anzuschauen
+
+    datum_liste = []
+
+    for messung in temp_liste:
+        datum_liste.append(messung["datum"])
+
+    selected_datum = st.selectbox(
+        "Messtag auswählen",
+        datum_liste
+    )
+
+    selected_messung = None
+
+    for messung in temp_liste: 
+        #dem ausgewähltem Datum wieder den richtigen Dateipfad zuordnen
+        if messung["datum"] == selected_datum:
+            selected_messung = messung
+
+    df_temp = load_temp_csv(selected_messung["dateipfad"])
+
+    plot_temp_ein_tag(df_temp, selected_datum)
+
+
+def show_temp_auswertung(patienten_id): 
+    # alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen
+    temp_liste = get_temp_messdaten_by_id(patienten_id)
+
+    if len(temp_liste) == 0: #Absicherung
+        st.warning("Für diese Patient:in liegen keine Temperaturmessungen vor.")
+        return
+
+    st.subheader("Temperaturtrend über 5 Tage")
+
+    df_summary = temp_summary(temp_liste)
+
+    plot_temp_summary(df_summary)
+
+    st.subheader("Tagesansicht")
+
+    show_temp_tag_auswahl(temp_liste)
