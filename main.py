@@ -32,9 +32,6 @@ with st.sidebar:
     ☎ 0721 123456
     """)
 
-# # damit die Auswahlmöglichkeiten nicht immer aufscheinen müssen wir eine 
-# # if Bedingung einführen, damit es nur aufscheint, wenn noch nichts gewählt wurde!
-
 if "rolle" not in st.session_state:
     st.session_state.rolle = None
 

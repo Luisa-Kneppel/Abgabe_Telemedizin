@@ -24,7 +24,6 @@ def get_person_list(person_data):
 
     return list_of_names
 
-
 def find_person_data_by_name(suchstring):
     """
     Übergabe: 'Nachname, Vorname'
