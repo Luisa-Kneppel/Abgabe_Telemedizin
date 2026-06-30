@@ -6,6 +6,7 @@ from arzt import anzeige_arzt
 from patienten import show_patient
 from login import login
 from read_data import load_user_data
+from arzt import anzeige_arzt
 
 st.set_page_config(
     page_title="Patientenverwaltung",
