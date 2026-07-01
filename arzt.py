@@ -4,25 +4,24 @@ import plotly.express as px
 import streamlit as st
 from read_data import load_person_data, get_person_list
 from patienten import get_person_object_by_full_name
-import streamlit as st
+import plotly.graph_objects as go
 
+TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
 
 def anzeige_arzt():
 
     patienten_data = load_person_data()
     person_names = get_person_list(patienten_data)
-
+    st.subheader("Patientendaten")
     selected_person = st.selectbox("Patient:in auswählen", person_names)
 
     patient = get_person_object_by_full_name(selected_person)
     
     col1, col2 = st.columns(2)
     with col1:
-
-        st.image(patient.foto, width=180)
+        st.image(patient.foto, width=200)
 
     with col2:
-        # ? wo müsste das hin? st.subheader("Patientendaten")
         st.write("Name: " + patient.get_full_name())
         st.write("Alter: " + str(patient.calc_age()))
         st.write("Telefon: " + patient.telefon)
@@ -85,15 +84,32 @@ def temp_summary(temp_liste):
 
     return df_summary
 
-def plot_temp_summary(df_summary):
+def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
     fig = px.line(
         df_summary,
         x="Datum",
         y=["Durchschnitt", "Minimum", "Maximum"],
         title="Temperaturverlauf",
-        markers=True
+        markers=True,
+        color_discrete_map={
+        "Durchschnitt": "blue",
+        "Minimum": "green",
+        "Maximum": "orange"
+        }
     )
 
+    df_alarme = df_summary[df_summary["Durchschnitt"] >= temp_grenzwert]
+
+    fig.add_trace(
+        go.Scatter(
+            x=df_alarme["Datum"],
+            y=df_alarme["Durchschnitt"],
+            mode="markers",
+            marker=dict(color="red", size=8),
+            name="Alarm Durchschnitt"
+        )
+    )
+    
     fig.update_layout(
         xaxis_title="Datum",
         yaxis_title="Temperatur in °C"
@@ -101,14 +117,43 @@ def plot_temp_summary(df_summary):
 
     st.plotly_chart(fig, use_container_width=True)
 
-def plot_temp_ein_tag(df_temp, datum):
-    # einen Tag plotten mit 1 Wert/h
+def get_temp_alarme_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
+    #alle Werte, die an einem Tag den Grenzwert überschreiten, 
+    # speichern wir in einem neuen Data Frame Alarme
+
+    df_alarme = df_temp[df_temp["temperatur"] >= temp_grenzwert]
+
+    return df_alarme
+
+def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT): 
+     # einen Tag plotten mit 1 Wert/h
     fig = px.line(
         df_temp,
         x="uhrzeit",
         y="temperatur",
         title="Temperaturverlauf am " + datum,
         markers=True
+    )
+
+    df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert=temp_grenzwert)
+
+    fig.add_trace(
+        go.Scatter(
+            x=df_alarme["uhrzeit"],
+            y=df_alarme["temperatur"],
+            mode="markers",
+            marker=dict(color="red", size=8),
+            name="Alarm"
+        )
+    )
+
+    fig.add_hline(
+        y=temp_grenzwert,
+        line_dash="dash",
+        line_color="rgba(255, 0, 0, 0.35)",
+        line_width=1,
+        annotation_text="Grenzwert " + str(temp_grenzwert) + " °C",
+        annotation_position="top left"
     )
 
     fig.update_layout(
@@ -140,8 +185,7 @@ def show_temp_tag_auswahl(temp_liste):
 
     df_temp = load_temp_csv(selected_messung["dateipfad"])
 
-    plot_temp_ein_tag(df_temp, selected_datum)
-
+    plot_temp_ein_tag(df_temp, selected_datum, temp_grenzwert=TEMP_GRENZWERT)
 
 def show_temp_auswertung(patienten_id): 
     # alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen
@@ -155,8 +199,11 @@ def show_temp_auswertung(patienten_id):
 
     df_summary = temp_summary(temp_liste)
 
-    plot_temp_summary(df_summary)
+    plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT) #?passt der Grenzewert hier?
 
     st.subheader("Tagesansicht")
 
     show_temp_tag_auswahl(temp_liste)
+
+
+
