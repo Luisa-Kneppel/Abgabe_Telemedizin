@@ -125,6 +125,26 @@ def get_temp_alarme_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
 
     return df_alarme
 
+def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
+   #textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
+   # und welche Uhrzeiten betroffen waren
+
+    df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert)
+
+    if len(df_alarme) == 0:
+        st.success("Keine Temperaturalarme an diesem Tag.")
+    else:
+        st.warning(
+            str(len(df_alarme))
+            + " Temperaturalarme an diesem Tag über "
+            + str(temp_grenzwert)
+            + " °C."
+        )
+
+        #st.dataframe(df_alarme) # wenn das drin ist wird noch 
+        # der df mit allen Alarmen und Zeitpunkten angezeigt
+        #sieht nicht schön aus und ist nicht sehr hilfreich
+
 def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT): 
      # einen Tag plotten mit 1 Wert/h
     fig = px.line(
@@ -185,7 +205,9 @@ def show_temp_tag_auswahl(temp_liste):
 
     df_temp = load_temp_csv(selected_messung["dateipfad"])
 
-    plot_temp_ein_tag(df_temp, selected_datum, temp_grenzwert=TEMP_GRENZWERT)
+    plot_temp_ein_tag(df_temp, selected_datum)
+
+    show_temp_alarm_info_ein_tag(df_temp)
 
 def show_temp_auswertung(patienten_id): 
     # alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen
