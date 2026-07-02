@@ -43,3 +43,33 @@ def find_person_data_by_name(suchstring):
             return eintrag
 
     return {}
+
+def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, telefon, adresse, diagnosen, medikamente):
+    patienten = load_person_data()
+
+    for patient in patienten:
+        # wir übergeben der Funktion eine Patienten_ID, hier wird der richtige Patient dann ausgewählt
+        if patient["id"] == patient_id:
+            patient["geburtsdatum"] = geburtsdatum
+            patient["vorname"] = vorname
+            patient["nachname"] = nachname
+
+            if foto is not None: 
+                bildpfad = f"data/pictures/patient_{patient_id}.png"
+                with open(bildpfad, "wb") as file:      # wb = write binary, also das Bild besteht aus binärdaten
+                    file.write(foto.getbuffer())    # das Bild wird aus dem Arbeitsspeicher geholt
+
+                patient["foto"] = bildpfad
+
+            patient["telefon"] = telefon
+            patient["adresse"] = adresse
+            patient["diagnosen"] = diagnosen
+            patient["medikamente"] = medikamente
+
+            break
+
+        # die neuen Daten in die JSON Datei übernehmen:
+
+    with open("data/patienten_daten.json", "w", encoding="utf-8")as file: 
+        json.dump(patienten, file, indent=4, ensure_ascii=False)        # durch das ensure_ascii werden die Namen schön dargebstellt (Ü;Ö;Ä), durch intent = 4 wird das JSON übersichtlich dargestellt (nicht alles in einer Zeile)
+

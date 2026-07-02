@@ -1,5 +1,5 @@
 from PIL import Image
-from read_data import load_person_data, get_person_list
+from read_data import load_person_data, get_person_list, update_patienten_daten
 import streamlit as st
 
 
@@ -119,8 +119,15 @@ def get_person_object_by_full_name(full_name):
     
 def show_patient(patient_id):
     """
-    Zeigt die Informationen des Patienten an.
+    Zeigt die Informationen des Patienten an +  Möglichkeit gewisse Daten abzuändern.
     """
+    if "bearbeiten" not in st.session_state:
+        """
+        hier wird der Bearbeitungsmodus angelegt, dadurch, dass Streamlit von 
+        oben nach unten durchläuft, würde sich ansonsten das Formular nicht öffnen!
+        """
+        st.session_state.bearbeiten = False
+
     persons = get_person_data()
     patient = None
 
@@ -136,16 +143,80 @@ def show_patient(patient_id):
     col1, col2 = st.columns(2)
     with col1:
         
-        st.image(patient.foto, width = 120) 
+        st.image(patient.foto, width = 150) 
 
     with col2:
+        st.subheader("Persönliche Daten")
         st.write("Name: " + patient.get_full_name())
         st.write("Alter: " + str(patient.calc_age()))
         st.write("Telefon: " + patient.telefon)
         st.write("Adresse: " + patient.get_adresse_as_string())
+
+        if not st.session_state.bearbeiten:
+            """hier wird der Bearbeitungsbutton eingeführt"""
+
+            if st.button("Persönliche Daten bearbeiten"):
+                st.session_state.bearbeiten = True
+                st.rerun()
+
+        st.divider()    # damit es übersichtlich bleibt (Trennlinie)
+
+        st.subheader("Medizinische Daten")  
         st.write("Diagnosen: " + patient.get_diagnosen_as_string())
         st.write("Medikamente: " + patient.get_medikamente_as_string())
 
+    # Bearbeitungsformular
+
+    if st.session_state.bearbeiten:
+        st.subheader("Perönliche Daten bearbeiten:")
+        
+        geburtsdatum = st.text_input("Geburtsdatum",
+                                     value =patient.geburtsdatum)
+        vorname = st.text_input("Vorname",
+                                value = patient.vorname)
+        nachname = st.text_input("Nachname", 
+                                 value = patient.nachname)
+        foto = st.file_uploader("Neues Profilbild",
+                                type = ["png"])         # weil wir alle Bilder in png hochgeladen haben, auf dieses Format begrenzen
+        
+        # Vorschau des neuen Bildes:
+        if foto is not None:
+            st.image(foto, width=180)
+
+        telefon = st.text_input("Telefon",
+                                value = patient.telefon)
+        adresse = {
+            "strasse": st.text_input("Straße", 
+                                     value = patient.adresse["strasse"]),
+            "plz": st.text_input("PLZ",
+                                 value = patient.adresse["plz"]), 
+            "ort": st.text_input("Ort",
+                                 value = patient.adresse["ort"])}
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("Speichern"):
+                #st.write("Button wurde gedrückt")
+                    
+                update_patienten_daten(
+                    patient.id,
+                    geburtsdatum,
+                    vorname,
+                    nachname,
+                    foto,
+                    telefon,
+                    adresse,
+                    patient.diagnosen,
+                    patient.medikamente)        # diagnosen und medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion!
+                st.success("Änderungen wurden gespeichert.")
+                st.session_state.bearbeiten = False
+                #st.rerun()
+        
+        with col2:
+            if st.button("Abbrechen"):
+                st.session_state.bearbeiten = False
+                st.rerun()
 
 
 
