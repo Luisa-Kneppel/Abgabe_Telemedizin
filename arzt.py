@@ -125,6 +125,60 @@ def get_temp_alarme_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
 
     return df_alarme
 
+def get_temp_alarme_patient(patienten_id, temp_grenzwert=TEMP_GRENZWERT):
+    #Auflistung aller Alamre für die Patient:in, die den Grenzwert überschreiten
+    # mit zuordnung zur ID
+
+    temp_liste = get_temp_messdaten_by_id(patienten_id)
+
+    alarm_liste = []
+
+    for messung in temp_liste:
+        df_temp = load_temp_csv(messung["dateipfad"])
+
+        df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert)
+
+        for alarm in df_alarme.to_dict("records"): 
+            #records = jede Zeile des Data Frames wird zu einem Dictionary
+            alarm_liste.append({
+                "Patient-ID": patienten_id,
+                "Datum": messung["datum"],
+                "Uhrzeit": alarm["uhrzeit"],
+                "Temperatur": alarm["temperatur"],
+                "Grenzwert": temp_grenzwert
+            })
+
+    df_alarme_patient = pd.DataFrame(alarm_liste)
+
+    return df_alarme_patient
+
+def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
+    # hier werden alle Alarme aller Patienten zusammengefasst, die den Grenzwert überschreiten  
+    #nicht mehr nur die einzelnen Patienten, Grundlage für Alarm Dashboard
+    patienten_data = load_person_data()
+
+    alle_alarme_liste = []
+
+    for patient in patienten_data:
+        patienten_id = patient["id"]
+
+        df_alarme_patient = get_temp_alarme_patient(patienten_id, temp_grenzwert)
+
+        for alarm in df_alarme_patient.to_dict("records"):
+            alle_alarme_liste.append({
+                "Patient-ID": alarm["Patient-ID"],
+                "Name": patient["nachname"] + ", " + patient["vorname"],
+                "Datum": alarm["Datum"],
+                "Uhrzeit": alarm["Uhrzeit"],
+                "Temperatur": alarm["Temperatur"],
+                "Grenzwert": alarm["Grenzwert"]
+            })
+
+    df_alarme_alle = pd.DataFrame(alle_alarme_liste)
+
+    return df_alarme_alle
+
+
 def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
    #textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
    # und welche Uhrzeiten betroffen waren
