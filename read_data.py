@@ -73,3 +73,60 @@ def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, te
     with open("data/patienten_daten.json", "w", encoding="utf-8")as file: 
         json.dump(patienten, file, indent=4, ensure_ascii=False)        # durch das ensure_ascii werden die Namen schön dargebstellt (Ü;Ö;Ä), durch intent = 4 wird das JSON übersichtlich dargestellt (nicht alles in einer Zeile)
 
+def add_patient(geburtsdatum, vorname, nachname, foto, telefon, adresse):
+    """diese Funktion fügt einen neuen Patienten zur JSON Datei hinzu"""
+    patienten = load_person_data()
+    neue_id = max(patient["id"] for patient in patienten) + 1   #dadurch bekommt der neu angelegte Patient die folgende ID
+
+    # Profilbild speichern
+    bildpfad = f"data/pictures/patient_{neue_id}.png"
+    with open(bildpfad, "wb") as file:
+        file.write(foto.getbuffer())    # dadurch wird das Bild dauerhaft und nicht nur im Arbeitsspeicher gespeichert.
+
+    neuer_patient = {
+        "id": neue_id,
+        "nachname": nachname,
+        "vorname": vorname,
+        "foto": bildpfad,
+        "geburtsdatum": geburtsdatum,
+        "telefon": telefon,
+        "adresse": adresse,
+        "medikamente": [],  # dürfen nur vom Arzt verschrieben werden
+        "diagnosen": []     # auch hier Aufgabe vom Arzt
+    }
+    patienten.append(neuer_patient)    
+
+    with open(
+        "data/patienten_daten.json",
+        "w",
+        encoding="utf-8"
+    ) as file:
+        json.dump(
+            patienten,
+            file,
+            indent=4,
+            ensure_ascii=False
+        )
+
+    return neue_id
+
+def add_user(username, password, patienten_id):
+    """fügt den neuen Benutzer zur user.json hinzu"""
+    users = load_user_data()
+    
+    neuer_user = {
+        "username": username,
+        "password": password,
+        "rolle":"patient",
+        "patienten_id": patienten_id
+    }
+    users.append(neuer_user)
+
+    with open(
+        "data/user.json",
+        "w",
+        encoding = "utf-8")as file:
+        json.dump(users, 
+                  file,
+                  indent = 4,
+                  ensure_ascii = False)

@@ -9,9 +9,19 @@ def login():
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
 
+    if "ansicht" not in st.session_state:
+        st.session_state.ansicht = "login"
+
     if st.session_state.logged_in:
         return
 
+    if st.session_state.ansicht == "login":
+        login_formular()
+    elif st.session_state == "registrieren":
+        registrieren()
+
+    
+def login_formular():
     st.title("Patientenverwaltung")
     st.subheader("Login")
 
@@ -37,3 +47,17 @@ def login():
                     st.rerun()
 
         st.error("Benutzername oder Passwort falsch.")      # für den Fall, dass Benutzernamen oder Passwort nicht mit den erwarteten Werten übereinstimmt
+
+    st.divider()
+    
+    if st.button("Neu registrieren"):
+        st.session_state.ansicht = "registrieren"
+        st.rerun()
+
+def registrieren():
+    st.title("Patientenverwaltung")
+    st.subheader("Registrierung")
+    
+    if st.button("Zurück"):
+        st.session_state.ansicht = "login"
+        st.rerun
