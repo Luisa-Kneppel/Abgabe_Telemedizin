@@ -8,7 +8,8 @@ import plotly.graph_objects as go
 
 TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
 
-def anzeige_arzt():
+def show_patientenansicht_arzt():
+    # hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen
 
     patienten_data = load_person_data()
     person_names = get_person_list(patienten_data)
@@ -30,11 +31,10 @@ def anzeige_arzt():
         st.write("Medikamente: " + patient.get_medikamente_as_string())
     
     st.divider() #horizontale Trennlinie 
-    
 
     show_temp_auswertung(patient.id)
 
-
+#Daten laden
 def load_temp_messdaten ():
     # wir lesen die Daten aus der json Datei ein (diese hat Zugriff auf die csv)
     with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
@@ -61,6 +61,7 @@ def load_temp_csv(dateipfad):
 
     return df_temp
 
+#Start der Berechnungen
 def temp_summary(temp_liste):
     # wir brauchen für den Trend die wichitgsten Daten der einzelnen Tage
     # diese Daten erstellen wir hier aus der temp_liste um es später zu plotten
@@ -83,39 +84,6 @@ def temp_summary(temp_liste):
     df_summary = pd.DataFrame(summary_liste)
 
     return df_summary
-
-def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
-    fig = px.line(
-        df_summary,
-        x="Datum",
-        y=["Durchschnitt", "Minimum", "Maximum"],
-        title="Temperaturverlauf",
-        markers=True,
-        color_discrete_map={
-        "Durchschnitt": "blue",
-        "Minimum": "green",
-        "Maximum": "orange"
-        }
-    )
-
-    df_alarme = df_summary[df_summary["Durchschnitt"] >= temp_grenzwert]
-
-    fig.add_trace(
-        go.Scatter(
-            x=df_alarme["Datum"],
-            y=df_alarme["Durchschnitt"],
-            mode="markers",
-            marker=dict(color="red", size=8),
-            name="Alarm Durchschnitt"
-        )
-    )
-    
-    fig.update_layout(
-        xaxis_title="Datum",
-        yaxis_title="Temperatur in °C"
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
 
 def get_temp_alarme_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
     #alle Werte, die an einem Tag den Grenzwert überschreiten, 
@@ -154,7 +122,7 @@ def get_temp_alarme_patient(patienten_id, temp_grenzwert=TEMP_GRENZWERT):
 
 def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
     # hier werden alle Alarme aller Patienten zusammengefasst, die den Grenzwert überschreiten  
-    #nicht mehr nur die einzelnen Patienten, Grundlage für Alarm Dashboard
+    # nicht mehr nur die einzelnen Patienten, Grundlage für Alarm Dashboard
     patienten_data = load_person_data()
 
     alle_alarme_liste = []
@@ -168,6 +136,7 @@ def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
             alle_alarme_liste.append({
                 "Patient-ID": alarm["Patient-ID"],
                 "Name": patient["nachname"] + ", " + patient["vorname"],
+                "Telefon": patient["telefon"],
                 "Datum": alarm["Datum"],
                 "Uhrzeit": alarm["Uhrzeit"],
                 "Temperatur": alarm["Temperatur"],
@@ -178,26 +147,92 @@ def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
 
     return df_alarme_alle
 
+def get_temp_alarm_summary_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
+    # auf Basis der vorherigen Fkt, aber kompaktere Alarmübersicht, 
+    # sodass es pro Patient und Tag nur eine Tabellenzeile gibt 
 
-def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
-   #textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
-   # und welche Uhrzeiten betroffen waren
-
-    df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert)
+    df_alarme = get_temp_alarme_alle_patienten(temp_grenzwert)
 
     if len(df_alarme) == 0:
-        st.success("Keine Temperaturalarme an diesem Tag.")
-    else:
-        st.warning(
-            str(len(df_alarme))
-            + " Temperaturalarme an diesem Tag über "
-            + str(temp_grenzwert)
-            + " °C."
-        )
+        return pd.DataFrame()
 
-        #st.dataframe(df_alarme) # wenn das drin ist wird noch 
-        # der df mit allen Alarmen und Zeitpunkten angezeigt
-        #sieht nicht schön aus und ist nicht sehr hilfreich
+    summary_liste = []
+
+    gruppen = df_alarme.groupby(["Patient-ID", "Name", "Telefon", "Datum"]) # alle Alarmzeile 
+
+    for gruppen_name, gruppe in gruppen:
+        patienten_id = gruppen_name[0]
+        name = gruppen_name[1]
+        telefon = gruppen_name[2]
+        datum = gruppen_name[3]
+
+        anzahl_alarme = len(gruppe)
+        max_temperatur = gruppe["Temperatur"].max()
+        erste_auffaelligkeit = gruppe["Uhrzeit"].min()
+        #letzte_auffaelligkeit = gruppe["Uhrzeit"].max()
+        max_temperatur = gruppe["Temperatur"].max()
+        schweregrad = get_temp_schweregrad(max_temperatur)
+
+        summary_liste.append({          # neue zusammengefasste Zeile 
+            "Patient-ID": patienten_id,
+            "Name": name,
+            "Telefon": telefon,
+            "Datum": datum,
+            "Anzahl Alarme": anzahl_alarme,
+            "Max. Temperatur": round(max_temperatur, 2),
+            "Schweregrad": schweregrad,
+            "Erste Auffälligkeit": erste_auffaelligkeit,
+            #"Letzte Auffälligkeit": letzte_auffaelligkeit
+        })
+
+    df_summary = pd.DataFrame(summary_liste)
+
+    return df_summary
+
+def get_temp_schweregrad(max_temperatur):
+    #Schweregrad des Alarms wird bestimmt
+    if max_temperatur >= 39.0:
+        return "hoch"
+
+    elif max_temperatur >= 38.5:
+        return "deutlich erhöht"
+
+    else:
+        return "leicht erhöht"
+
+#Plots bzw. Streamlit Ausgabe
+def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
+    fig = px.line(
+        df_summary,
+        x="Datum",
+        y=["Durchschnitt", "Minimum", "Maximum"],
+        title="Temperaturverlauf",
+        markers=True,
+        color_discrete_map={
+        "Durchschnitt": "blue",
+        "Minimum": "green",
+        "Maximum": "orange"
+        }
+    )
+
+    df_alarme = df_summary[df_summary["Durchschnitt"] >= temp_grenzwert]
+
+    fig.add_trace(
+        go.Scatter(
+            x=df_alarme["Datum"],
+            y=df_alarme["Durchschnitt"],
+            mode="markers",
+            marker=dict(color="red", size=8),
+            name="Alarm Durchschnitt"
+        )
+    )
+    
+    fig.update_layout(
+        xaxis_title="Datum",
+        yaxis_title="Temperatur in °C"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT): 
      # einen Tag plotten mit 1 Wert/h
@@ -236,6 +271,25 @@ def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT):
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
+   #textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
+   # und welche Uhrzeiten betroffen waren
+
+    df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert)
+
+    if len(df_alarme) == 0:
+        st.success("Keine Temperaturalarme an diesem Tag.")
+    else:
+        st.warning(
+            str(len(df_alarme))
+            + " Temperaturalarme an diesem Tag über "
+            + str(temp_grenzwert)
+            + " °C."
+        )
+
+        #st.dataframe(df_alarme) # wenn das drin ist wird noch der df mit allen Alarmen und Zeitpunkten angezeigt
+        #sieht nicht schön aus und ist nicht sehr hilfreich
 
 def show_temp_tag_auswahl(temp_liste):
     # Auswahlbox um einen der letzten 5 Tage anzuschauen
@@ -281,5 +335,47 @@ def show_temp_auswertung(patienten_id):
 
     show_temp_tag_auswahl(temp_liste)
 
+def show_temp_alarmuebersicht():
+    #Zeigt eine Übersicht aller Temperaturalarme aller Patienten mit der summary als Basis
 
+    st.subheader("Alarmübersicht")
 
+    df_alarm_summary = get_temp_alarm_summary_alle_patienten()
+
+    if len(df_alarm_summary) == 0:
+        st.success("Aktuell liegen keine Temperaturalarme vor.")
+        return
+
+    schweregrad_sortierung = {
+        "hoch": 3,
+        "deutlich erhöht": 2,
+        "leicht erhöht": 1
+    }
+
+    df_alarm_summary["Schweregrad-Sortierung"] = df_alarm_summary["Schweregrad"].map(schweregrad_sortierung)
+
+    df_alarm_summary = df_alarm_summary.sort_values(
+        by=["Datum", "Schweregrad-Sortierung", "Max. Temperatur"],
+        ascending=[False, False, False]
+    )
+
+    df_alarm_summary = df_alarm_summary.drop(columns=["Schweregrad-Sortierung"])
+
+    st.warning(
+        str(len(df_alarm_summary))
+        + " auffällige Patient:innen-Tage über " #Benneung nochma checken
+        + str(TEMP_GRENZWERT)
+        + " °C gefunden."
+    )
+
+    st.dataframe(df_alarm_summary, use_container_width=True, hide_index=True)
+
+def anzeige_arzt():
+    #die Funktion ist wichtig, da sie die Schnittstelle zur main.py darstellt
+    tab_patienten,tab_alarme = st.tabs(["Patient:innen", "Alarmübersicht"])
+    
+    with tab_patienten:
+        show_patientenansicht_arzt()
+
+    with tab_alarme:
+        show_temp_alarmuebersicht()
