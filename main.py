@@ -20,7 +20,7 @@ with st.sidebar:
             st.session_state.clear()
             st.rerun()
 
-    for i in range(12):
+    for i in range(8):
         st.write("")
 
     st.markdown("""

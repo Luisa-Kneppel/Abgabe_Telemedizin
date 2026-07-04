@@ -1,6 +1,7 @@
 from PIL import Image
 from read_data import load_person_data, get_person_list, update_patienten_daten
 import streamlit as st
+from read_data import add_datei
 
 
 class Person:
@@ -245,3 +246,14 @@ def show_patient(patient_id):
                 if abbrechen:
                     st.session_state.bearbeiten = False
                     st.rerun()
+
+    st.divider()
+    st.subheader("Dateien hochladen")
+
+    datei = st.file_uploader(
+        "CSV-Datei auswählen",
+        type = ["csv"])
+    if datei is not None:
+        if st.button("Datei hochladen"):
+            add_datei(patient.id, datei)
+            st.success("Datei erfolgreich hochgeladen.")

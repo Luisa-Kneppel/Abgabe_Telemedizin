@@ -1,5 +1,5 @@
 import json
-
+from datetime import datetime
 
 def load_person_data(person_data_path="data/patienten_daten.json"):
     """Lädt die Patientendaten aus der JSON-Datei."""
@@ -130,3 +130,36 @@ def add_user(username, password, patienten_id):
                   file,
                   indent = 4,
                   ensure_ascii = False)
+
+def add_datei(patient_id, csv_datei):
+    """Speichert hochgeladene Dateien und fügt sie zur JSON Datei hinzu"""
+    # die Datei laden:
+    with open("data/messungen_datenbank.json", "r", encoding = "utf-8")as file:
+        messungen = json.load(file)
+    # Namen ersetllen
+    datum = datetime.now().strftime("%Y-%m-%D")
+    dateiname = f"patient_{patient_id}_{datum}.csv"
+    dateipfad = "data/temperatur_messdaten/" + dateiname
+
+    # CSV speichern:
+    with open(dateipfad, "wb") as file:
+        file.write(csv_datei.getbuffer())
+    
+    # in JSON hinzufügen:
+    messungen.append({
+        "patient_id": patient_id,
+        "typ": "koerpertemperatur",
+        "datum": datum,
+        "dateipfad": f"patient_{patient_id}/{dateiname}"})
+    # JSON speichern
+    with open(
+        "data/messungen_datenbank.json",
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            messungen,
+            file,
+            indent=4,
+            ensure_ascii=False)
