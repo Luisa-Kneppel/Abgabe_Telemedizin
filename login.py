@@ -3,6 +3,7 @@
 import streamlit as st
 from read_data import load_user_data, add_patient, add_user
 from streamlit_authenticator.utilities.hasher import Hasher
+from datetime import date 
 
 def login():
 
@@ -67,7 +68,7 @@ def login_formular():
     if st.button("Zurück zur Startseite"):
         st.session_state.rolle = None
         st.session_state.ansicht = "login"
-        st.rerun
+        st.rerun()
 
 def registrieren():
     st.title("Patientenverwaltung")
@@ -77,7 +78,14 @@ def registrieren():
 
     vorname = st.text_input("Vorname")
     nachname = st.text_input("Nachname")
-    geburtsdatum = st.date_input("Geburtsdatum")
+
+    geburtsdatum = st.date_input(
+    "Geburtsdatum",
+    value= None,
+    min_value=date(1900, 1, 1),
+    max_value=date.today()
+    )
+
     telefon = st.text_input("Telefon")
     foto = st.file_uploader("Profilbild", type = ["png"])
 
@@ -111,7 +119,7 @@ def registrieren():
             if (
                 vorname == ""
                 or nachname == ""
-                or geburtsdatum == ""
+                or geburtsdatum == None
                 or telefon == ""
                 or adresse["strasse"] == ""
                 or adresse["plz"] == ""
@@ -141,8 +149,8 @@ def registrieren():
             # hier wird das Passwort gehasht:
             hashed_password = Hasher.hash(password)
             # das Datum in einen String umwandeln:
-            geburtsdatum = geburtsdatum.strftime("%Y-%m-%D")
-            # neuen Benutzer anlegen bzw. speixhern:
+            geburtsdatum = geburtsdatum.strftime("%Y-%m-%d")
+            # neuen Benutzer anlegen bzw. speichern:
             patient_id = add_patient(
                     geburtsdatum,
                     vorname,

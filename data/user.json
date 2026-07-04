@@ -8,30 +8,30 @@
         "username": "marie.mueller",
         "password": "$2b$12$5dI2CO5wSEgkXFoyzEyrZOAWG6DJbgaMOwwyYcf92j0AEAiuzYtVG",
         "rolle": "patient",
-        "patient_id": 1
+        "patienten_id": 1
     },
     {
         "username": "anna.schmidt",
         "password": "$2b$12$CG6MgLXvFiF2TNTZ1lIEf.AuT8g6JD9iwczv.sso6HIgDVlyh/rWK",
         "rolle": "patient",
-        "patient_id": 2
+        "patienten_id": 2
     },
     {
         "username": "lukas.weber",
         "password": "$2b$12$crPgGnABltrfSqTTrHsF6udoYrZ0W9mxkHa7lT3./deTtnuQ8GlA.",
         "rolle": "patient",
-        "patient_id": 3
+        "patienten_id": 3
     },
     {
         "username": "laura.fischer",
         "password": "$2b$12$4mCGndClENETa/Z8o8eDjOYegg78bunEtkh8jqxM.PcHVTahFGv6O",
         "rolle": "patient",
-        "patient_id": 4
+        "patienten_id": 4
     },
     {
         "username": "jonas.keller",
         "password": "$2b$12$qBfJfZSaNbK.dPvmqBupyuelKp9Quyq2RMc8b.NDygJ5nDy5I3iRK",
         "rolle": "patient",
-        "patient_id": 5
+        "patienten_id": 5
     }
 ]

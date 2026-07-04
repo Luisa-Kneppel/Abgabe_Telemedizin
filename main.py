@@ -86,4 +86,4 @@ if current_user["rolle"] == "arzt":
     anzeige_arzt()
 
 elif current_user["rolle"] == "patient":
-    show_patient(current_user["patient_id"])
+    show_patient(current_user["patienten_id"])
