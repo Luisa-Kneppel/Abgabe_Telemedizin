@@ -173,5 +173,110 @@
     "typ": "koerpertemperatur",
     "datum": "2026-06-18",
     "dateipfad": "temperatur_messdaten/patient_5/patient_5_2026-06-18.csv"
+  },
+  {
+    "messung_id": "TEMP-P6-001",
+    "patient_id": 6,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-14",
+    "dateipfad": "temperatur_messdaten/patient_6/patient_6_2026-06-14.csv"
+  },
+  {
+    "messung_id": "TEMP-P6-002",
+    "patient_id": 6,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-15",
+    "dateipfad": "temperatur_messdaten/patient_6/patient_6_2026-06-15.csv"
+  },
+  {
+    "messung_id": "TEMP-P6-003",
+    "patient_id": 6,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-16",
+    "dateipfad": "temperatur_messdaten/patient_6/patient_6_2026-06-16.csv"
+  },
+  {
+    "messung_id": "TEMP-P6-004",
+    "patient_id": 6,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-17",
+    "dateipfad": "temperatur_messdaten/patient_6/patient_6_2026-06-17.csv"
+  },
+  {
+    "messung_id": "TEMP-P6-005",
+    "patient_id": 6,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-18",
+    "dateipfad": "temperatur_messdaten/patient_6/patient_6_2026-06-18.csv"
+  },
+  {
+    "messung_id": "TEMP-P7-001",
+    "patient_id": 7,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-14",
+    "dateipfad": "temperatur_messdaten/patient_7/patient_7_2026-06-14.csv"
+  },
+  {
+    "messung_id": "TEMP-P7-002",
+    "patient_id": 7,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-15",
+    "dateipfad": "temperatur_messdaten/patient_7/patient_7_2026-06-15.csv"
+  },
+  {
+    "messung_id": "TEMP-P7-003",
+    "patient_id": 7,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-16",
+    "dateipfad": "temperatur_messdaten/patient_7/patient_7_2026-06-16.csv"
+  },
+  {
+    "messung_id": "TEMP-P7-004",
+    "patient_id": 7,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-17",
+    "dateipfad": "temperatur_messdaten/patient_7/patient_7_2026-06-17.csv"
+  },
+  {
+    "messung_id": "TEMP-P7-005",
+    "patient_id": 7,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-18",
+    "dateipfad": "temperatur_messdaten/patient_7/patient_7_2026-06-18.csv"
+  },
+  {
+    "messung_id": "TEMP-P8-001",
+    "patient_id": 8,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-14",
+    "dateipfad": "temperatur_messdaten/patient_8/patient_8_2026-06-14.csv"
+  },
+  {
+    "messung_id": "TEMP-P8-002",
+    "patient_id": 8,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-15",
+    "dateipfad": "temperatur_messdaten/patient_8/patient_8_2026-06-15.csv"
+  },
+  {
+    "messung_id": "TEMP-P8-003",
+    "patient_id": 8,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-16",
+    "dateipfad": "temperatur_messdaten/patient_8/patient_8_2026-06-16.csv"
+  },
+  {
+    "messung_id": "TEMP-P8-004",
+    "patient_id": 8,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-17",
+    "dateipfad": "temperatur_messdaten/patient_8/patient_8_2026-06-17.csv"
+  },
+  {
+    "messung_id": "TEMP-P8-005",
+    "patient_id": 8,
+    "typ": "koerpertemperatur",
+    "datum": "2026-06-18",
+    "dateipfad": "temperatur_messdaten/patient_8/patient_8_2026-06-18.csv"
   }
 ]

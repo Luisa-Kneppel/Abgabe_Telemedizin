@@ -107,6 +107,74 @@
         "diagnosen": [
             "Diabetes mellitus Typ 2"
         ]
+    },
+    {
+        "id": 6,
+        "nachname": "Becker",
+        "vorname": "Thomas",
+        "foto": "data/pictures/Becker_Thomas.png",
+        "geburtsdatum": "1974-11-09",
+        "telefon": "0172-6543210",
+        "adresse": {
+            "strasse": "Lindenweg 7",
+            "plz": "69115",
+            "ort": "Heidelberg"
+        },
+        "medikamente": [
+            {
+                "name": "Paracetamol",
+                "dosis": "500 mg",
+                "einnahme": "bei Bedarf"
+            }
+        ],
+        "diagnosen": [
+            "keine bekannten Diagnosen"
+        ]
+    },
+    {
+        "id": 7,
+        "nachname": "Hoffmann",
+        "vorname": "Sophie",
+        "foto": "data/pictures/Hoffmann_Sophie.png",
+        "geburtsdatum": "1998-02-26",
+        "telefon": "0160-7788990",
+        "adresse": {
+            "strasse": "Schillerstrasse 18",
+            "plz": "76133",
+            "ort": "Karlsruhe"
+        },
+        "medikamente": [
+            {
+                "name": "Ibuprofen",
+                "dosis": "400 mg",
+                "einnahme": "bei Bedarf"
+            }
+        ],
+        "diagnosen": [
+            "Unklare Temperaturschwankungen"
+        ]
+    },
+    {
+        "id": 8,
+        "nachname": "Wagner",
+        "vorname": "Jonas",
+        "foto": "data/pictures/Wagner_Jonas.png",
+        "geburtsdatum": "1966-08-03",
+        "telefon": "0151-2468135",
+        "adresse": {
+            "strasse": "Rathausplatz 4",
+            "plz": "68159",
+            "ort": "Mannheim"
+        },
+        "medikamente": [
+            {
+                "name": "Antazida",
+                "einnahme": "1-1-1"
+            }
+        ],
+        "diagnosen": [
+            "chronische Magen-Darm-Beschwerden"
+        ]
     }
 
 ]
