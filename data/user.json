@@ -33,5 +33,23 @@
         "password": "$2b$12$qBfJfZSaNbK.dPvmqBupyuelKp9Quyq2RMc8b.NDygJ5nDy5I3iRK",
         "rolle": "patient",
         "patienten_id": 5
+    },
+    {
+        "username": "thomas.becker",
+        "password": "$2b$12$bOw/UclcuNX3IU1ykUAcMOFPaxfn2o7cqB7u/8TnSvStmwkWW6INO",
+        "rolle": "patient",
+        "patienten_id": 6
+    },
+    {
+        "username": "sophie.hoffmann",
+        "password": "$2b$12$eYlbWDuEvpzTuLP.6Ygywul5cqTwx2/OAISTVtbOYIBbMZFigAql6",
+        "rolle": "patient",
+        "patienten_id": 7
+    },
+    {
+        "username": "jonas.wagner",
+        "password": "$2b$12$ty2h/QU9alMaCNxBB9HA6e6hq44H9Wp94h5rOZcQP0LCQnbeFz/Ue",
+        "rolle": "patient",
+        "patienten_id": 8
     }
 ]

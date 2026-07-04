@@ -169,7 +169,8 @@
         "medikamente": [
             {
                 "name": "Antazida",
-                "einnahme": "1-1-1"
+                "einnahme": "1-1-1",
+                "dosis": "nach jeder Mahlzeit"
             }
         ],
         "diagnosen": [
