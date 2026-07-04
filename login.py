@@ -20,10 +20,18 @@ def login():
     elif st.session_state.ansicht == "registrieren":
         registrieren()
 
-    
 def login_formular():
     st.title("Patientenverwaltung")
-    st.subheader("Login")
+    if st.session_state.rolle == "arzt":
+        st.subheader("Login - Arzt")
+    elif st.session_state.rolle == "patient":
+        st.subheader("Login - Patienten")
+    
+    # damit die Mitteilung "Registrierung erfolgreich" angezeigt wird,
+    # ohne dem hier würde die Seite direkt neu laden und die Nachricht würde direkt verschwinden
+    if st.session_state.get("registrierung_erfolgreich"):
+        st.toast("Registrierung erfolgreich!")
+        del st.session_state["registrierung_erfolgreich"]
 
     username = st.text_input("Benutzername")
     password = st.text_input("Passwort", type="password")
@@ -48,11 +56,18 @@ def login_formular():
 
         st.error("Benutzername oder Passwort falsch.")      # für den Fall, dass Benutzernamen oder Passwort nicht mit den erwarteten Werten übereinstimmt
 
-    st.divider()
-    
-    if st.button("Neu registrieren"):
-        st.session_state.ansicht = "registrieren"
-        st.rerun()
+    if st.session_state.rolle == "patient":
+        # damit das neu registrieren nur im Patientendashboard erscheint. Ohne dem würde es auch im Ärztedashboard angezeigt werden
+
+        st.divider()
+
+        if st.button("Neu registrieren"):
+            st.session_state.ansicht = "registrieren"
+            st.rerun()
+    if st.button("Zurück zur Startseite"):
+        st.session_state.rolle = None
+        st.session_state.ansicht = "login"
+        st.rerun
 
 def registrieren():
     st.title("Patientenverwaltung")
@@ -62,7 +77,7 @@ def registrieren():
 
     vorname = st.text_input("Vorname")
     nachname = st.text_input("Nachname")
-    geburtsdatum = st.text_input("Geburtsdatum (JJJJ-MM-TT)")
+    geburtsdatum = st.date_input("Geburtsdatum")
     telefon = st.text_input("Telefon")
     foto = st.file_uploader("Profilbild", type = ["png"])
 
@@ -72,8 +87,7 @@ def registrieren():
     adresse = {
         "strasse": st.text_input("Straße"),
         "plz": st.text_input("PLZ"),
-        "ort": st.text_input("Ort")
-    }
+        "ort": st.text_input("Ort")}
 
     st.divider()
     st.write("### Zugangsdaten")
@@ -82,19 +96,17 @@ def registrieren():
 
     password = st.text_input(
         "Passwort",
-        type="password"
-    )
+        type="password")
 
     password2 = st.text_input(
         "Passwort bestätigen",
-        type="password"
-    )
+        type="password")
 
     col1, col2 = st.columns(2)
 
     with col1:
         if st.button("Registrieren"):
-            # damit die Registrierung anschließend gespeichert wird, werden hier alle Daten geprüft:
+            # damit die Registrierung gespeichert wird, werden hier alle Daten geprüft:
             # die nächste if Bedingung stellt sicher, dass die Daten vollständig sind:
             if (
                 vorname == ""
@@ -117,8 +129,8 @@ def registrieren():
             if password != password2:
                 st.error("Die Passwörter stimmen nicht überein.")
                 return
-            # jezt wird geprüft, ob der Benutzer bereits angelegt ist (gesucht wird mitteln Benutzernamen)
             
+            # jezt wird geprüft, ob der Benutzer bereits angelegt ist (gesucht wird mitteln Benutzernamen)
             users = load_user_data()
 
             for user in users:
@@ -128,7 +140,9 @@ def registrieren():
             
             # hier wird das Passwort gehasht:
             hashed_password = Hasher.hash(password)
-            # neuen Benutzer anlegen:
+            # das Datum in einen String umwandeln:
+            geburtsdatum = geburtsdatum.strftime("%Y-%m-%D")
+            # neuen Benutzer anlegen bzw. speixhern:
             patient_id = add_patient(
                     geburtsdatum,
                     vorname,
@@ -140,13 +154,11 @@ def registrieren():
                 username,
                 hashed_password,
                 patient_id) 
-            st.toast("Registrierung erfolgreich!")
+            st.session_state.registrierung_erfolgreich = True
             st.session_state.ansicht = "login"
             st.rerun()
-            
 
     with col2:
-
         if st.button("Zurück"):
             st.session_state.ansicht = "login"
             st.rerun()
