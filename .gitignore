@@ -1,5 +1,3 @@
-neue_personen.py 
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -221,3 +219,6 @@ __marimo__/
 
 # Startpasswörter
 generate_password.py
+
+#zusätzliche Patient:innen anlegen
+neue_personen.py 

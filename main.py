@@ -6,7 +6,6 @@ from arzt import anzeige_arzt
 from patienten import show_patient
 from login import login
 from read_data import load_user_data
-from arzt import anzeige_arzt
 
 st.set_page_config(
     page_title="Patientenverwaltung",
@@ -21,16 +20,21 @@ with st.sidebar:
             st.session_state.clear()
             st.rerun()
 
-    for i in range(18):
+    for i in range(12):
         st.write("")
 
     st.markdown("""
     ### Musterpraxis
 
-    Maximilianstraße 2
-    6020 Innsbruck
+    Maximilianstraße 2  
+    6020 Innsbruck  
 
-    ☎ 0721 123456
+    ☎ 0721 123456  
+    ✉ musterpraxis@innsbruck.at  
+
+    **Entwicklung:**  
+    Johanna Helfer  
+    Luisa Kneppel
     """)
 
 if "rolle" not in st.session_state:
@@ -38,31 +42,41 @@ if "rolle" not in st.session_state:
 
 if st.session_state.rolle is None:
 
-    left, center, right = st.columns([1.5,4,1.5])
+    left, center, right = st.columns([0.4, 6, 0.4])
 
     with center:
-
-        st.header("Patientenverwaltung")
-
+        st.write("")
         st.write("")
 
-        st.write("Bitte wählen Sie Ihre Rolle:")
+        with st.container(border=True):
+            st.title("Willkommen in der Patientenverwaltung")
 
-        st.write("")
+            st.write(
+                "Diese Anwendung unterstützt die Verwaltung von Patientendaten und die Auswertung medizinischer Messwerte.")
 
-        col1, col2 = st.columns(2)
+            st.divider()
 
-        with col1:
-            if st.button("Arzt", use_container_width=True):
-                st.session_state.rolle = "arzt"
-                st.rerun()
+            st.subheader("Bitte wählen Sie Ihre Rolle")
+            st.write("")
 
-        with col2:
-            if st.button("Patient", use_container_width=True):
-                st.session_state.rolle = "patient"
-                st.rerun()
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.write("**Ärzt:innenbereich**")
+
+                if st.button("Als **Arzt** anmelden", use_container_width=True):
+                    st.session_state.rolle = "arzt"
+                    st.rerun()
+
+            with col2:
+                st.write("**Patient:innenbereich**")
+                
+                if st.button("Als **Patient:in** anmelden", use_container_width=True):
+                    st.session_state.rolle = "patient"
+                    st.rerun()
 
     st.stop()
+
 
 login()
 

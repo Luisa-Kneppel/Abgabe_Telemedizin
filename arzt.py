@@ -18,18 +18,26 @@ def show_patientenansicht_arzt():
 
     patient = get_person_object_by_full_name(selected_person)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.image(patient.foto, width=200)
+    with st.container(border=True):
+        col1, col2, col3 = st.columns([1, 2, 2])
 
-    with col2:
-        st.write("Name: " + patient.get_full_name())
-        st.write("Alter: " + str(patient.calc_age()))
-        st.write("Telefon: " + patient.telefon)
-        st.write("Adresse: " + patient.get_adresse_as_string())
-        st.write("Diagnosen: " + patient.get_diagnosen_as_string())
-        st.write("Medikamente: " + patient.get_medikamente_as_string())
-    
+        with col1:
+            st.image(patient.foto, width=180)
+
+        with col2:
+            st.subheader(patient.get_full_name())
+
+            st.write("**Alter:** " + str(patient.calc_age()) + " Jahre")
+            st.write("**Telefon:** " + patient.telefon)
+            st.write("**Adresse:** " + patient.get_adresse_as_string())
+
+        with col3:
+            st.write("**Diagnosen:**")
+            st.write(patient.get_diagnosen_as_string())
+
+            st.write("**Medikamente:**")
+            st.write(patient.get_medikamente_as_string())
+        
     st.divider() #horizontale Trennlinie 
 
     show_temp_auswertung(patient.id)
@@ -215,6 +223,14 @@ def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
         }
     )
 
+    fig.add_hline(
+        y=temp_grenzwert,
+        line_color="rgba(255, 0, 0, 0.35)",
+        line_width=1,
+        annotation_text="Grenzwert " + str(temp_grenzwert) + " °C",
+        annotation_position="top left"
+    )
+
     df_alarme = df_summary[df_summary["Durchschnitt"] >= temp_grenzwert]
 
     fig.add_trace(
@@ -258,7 +274,6 @@ def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT):
 
     fig.add_hline(
         y=temp_grenzwert,
-        line_dash="dash",
         line_color="rgba(255, 0, 0, 0.35)",
         line_width=1,
         annotation_text="Grenzwert " + str(temp_grenzwert) + " °C",
@@ -317,27 +332,50 @@ def show_temp_tag_auswahl(temp_liste):
 
     show_temp_alarm_info_ein_tag(df_temp)
 
-def show_temp_auswertung(patienten_id): 
+def show_temp_auswertung(patienten_id):
     # alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen
     temp_liste = get_temp_messdaten_by_id(patienten_id)
 
-    if len(temp_liste) == 0: #Absicherung
+    if len(temp_liste) == 0:
         st.warning("Für diese Patient:in liegen keine Temperaturmessungen vor.")
         return
 
-    st.subheader("Temperaturtrend über 5 Tage")
-
     df_summary = temp_summary(temp_liste)
 
-    plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT) #?passt der Grenzewert hier?
+    with st.container(border=True):
+        st.subheader("Temperaturtrend über 5 Tage")
 
-    st.subheader("Tagesansicht")
+        col1, col2, col3 = st.columns(3)
 
-    show_temp_tag_auswahl(temp_liste)
+        with col1:
+            st.metric(
+                "Ø Temperatur",
+                str(round(df_summary["Durchschnitt"].mean(), 1)) + " °C"
+            )
+
+        with col2:
+            st.metric(
+                "Max. Temperatur",
+                str(round(df_summary["Maximum"].max(), 1)) + " °C"
+            )
+
+        with col3:
+            alarmtage = len(df_summary[df_summary["Durchschnitt"] >= TEMP_GRENZWERT])
+            st.metric(
+                "Alarmtage",
+                str(alarmtage)
+            )
+
+        plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT)
+
+    with st.container(border=True):
+        st.subheader("Tagesansicht")
+        show_temp_tag_auswahl(temp_liste)
 
 def show_temp_alarmuebersicht():
     #Zeigt eine Übersicht aller Temperaturalarme aller Patienten mit der summary als Basis
-
+    # Pro Patient:in und Tag wird eine Zeile angezeigt
+    
     st.subheader("Alarmübersicht")
 
     df_alarm_summary = get_temp_alarm_summary_alle_patienten()
@@ -361,14 +399,47 @@ def show_temp_alarmuebersicht():
 
     df_alarm_summary = df_alarm_summary.drop(columns=["Schweregrad-Sortierung"])
 
-    st.warning(
-        str(len(df_alarm_summary))
-        + " auffällige Patient:innen-Tage über " #Benneung nochma checken
-        + str(TEMP_GRENZWERT)
-        + " °C gefunden."
+    with st.container(border=True):
+        st.write("### Zusammenfassung")
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.metric(
+                "Auffällige Tage",
+                len(df_alarm_summary)
+            )
+
+    with col2:
+        anzahl_patienten_mit_alarm = df_alarm_summary["Patient-ID"].nunique() 
+        #nunique bedeutet, dass die IDs gezählt werden,aber nur die die sich von vorherigen unterscheiden
+        st.metric(
+            "Patient:innen mit Alarm",
+            anzahl_patienten_mit_alarm
     )
 
-    st.dataframe(df_alarm_summary, use_container_width=True, hide_index=True)
+        with col3:
+            anzahl_hoch = len(df_alarm_summary[df_alarm_summary["Schweregrad"] == "hoch"])
+            st.metric("Hohe Alarme", anzahl_hoch)
+
+    with st.container(border=True):
+        st.write("### Alarmtabelle")
+
+        schweregrad_filter = st.selectbox(
+            "Schweregrad filtern",
+            ["Alle", "hoch", "deutlich erhöht", "leicht erhöht"]
+        )
+
+        if schweregrad_filter != "Alle":
+            df_alarm_summary = df_alarm_summary[
+                df_alarm_summary["Schweregrad"] == schweregrad_filter
+            ]
+
+        st.dataframe(
+            df_alarm_summary,
+            use_container_width=True,
+            hide_index=True
+        )
 
 def anzeige_arzt():
     #die Funktion ist wichtig, da sie die Schnittstelle zur main.py darstellt

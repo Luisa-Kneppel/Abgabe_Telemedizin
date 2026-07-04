@@ -98,7 +98,6 @@ def get_person_data():
 
     return person_object_list
 
-
 def get_person_object_by_full_name(full_name):
     """
     Übergabe: 'Nachname, Vorname'
@@ -114,8 +113,6 @@ def get_person_object_by_full_name(full_name):
             return person
 
     return None
-
-
     
 def show_patient(patient_id):
     """
@@ -140,84 +137,111 @@ def show_patient(patient_id):
         st.error("Patient wurde nicht gefunden.")
         return
 
-    col1, col2 = st.columns(2)
-    with col1:
-        
-        st.image(patient.foto, width = 150) 
+    st.title("Mein Patientenbereich")
 
-    with col2:
-        st.subheader("Persönliche Daten")
-        st.write("Name: " + patient.get_full_name())
-        st.write("Alter: " + str(patient.calc_age()))
-        st.write("Telefon: " + patient.telefon)
-        st.write("Adresse: " + patient.get_adresse_as_string())
+    with st.container(border=True):
+        col1, col2, col3 = st.columns([1, 2, 2])
 
-        if not st.session_state.bearbeiten:
-            """hier wird der Bearbeitungsbutton eingeführt"""
+        with col1:
+            st.image(patient.foto, width=180)
 
-            if st.button("Persönliche Daten bearbeiten"):
-                st.session_state.bearbeiten = True
-                st.rerun()
+        with col2:
+            st.subheader("Willkommen, " + patient.vorname)
 
-        st.divider()    # damit es übersichtlich bleibt (Trennlinie)
+            st.write("**Name:** " + patient.get_full_name())
+            st.write("**Alter:** " + str(patient.calc_age()) + " Jahre")
+            st.write("**Telefon:** " + patient.telefon)
+            st.write("**Adresse:** " + patient.get_adresse_as_string())
 
-        st.subheader("Medizinische Daten")  
-        st.write("Diagnosen: " + patient.get_diagnosen_as_string())
-        st.write("Medikamente: " + patient.get_medikamente_as_string())
+        with col3:
+            st.subheader("Medizinische Übersicht")
+
+            st.write("**Diagnosen:**")
+            st.info(patient.get_diagnosen_as_string())
+
+            st.write("**Medikamente:**")
+            st.success(patient.get_medikamente_as_string())
+
+    if not st.session_state.bearbeiten:
+        if st.button("Persönliche Daten bearbeiten"):
+            st.session_state.bearbeiten = True
+            st.rerun()
 
     # Bearbeitungsformular
-
     if st.session_state.bearbeiten:
-        st.subheader("Perönliche Daten bearbeiten:")
-        
-        geburtsdatum = st.text_input("Geburtsdatum",
-                                     value =patient.geburtsdatum)
-        vorname = st.text_input("Vorname",
-                                value = patient.vorname)
-        nachname = st.text_input("Nachname", 
-                                 value = patient.nachname)
-        foto = st.file_uploader("Neues Profilbild",
-                                type = ["png"])         # weil wir alle Bilder in png hochgeladen haben, auf dieses Format begrenzen
-        
-        # Vorschau des neuen Bildes:
-        if foto is not None:
-            st.image(foto, width=180)
+        with st.container(border=True):
+            st.subheader("Persönliche Daten bearbeiten")
+            st.caption("Hier können Sie Ihre gespeicherten Kontaktdaten und Ihr Profilbild aktualisieren.")
 
-        telefon = st.text_input("Telefon",
-                                value = patient.telefon)
-        adresse = {
-            "strasse": st.text_input("Straße", 
-                                     value = patient.adresse["strasse"]),
-            "plz": st.text_input("PLZ",
-                                 value = patient.adresse["plz"]), 
-            "ort": st.text_input("Ort",
-                                 value = patient.adresse["ort"])}
+            with st.form("patient_daten_bearbeiten"): #eingabefelder sind zu einem Formular zsmgefasst
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.subheader("Kontaktdaten")
+
+                    geburtsdatum = st.text_input(
+                        "Geburtsdatum", value=patient.geburtsdatum)
+
+                    vorname = st.text_input(
+                        "Vorname", value=patient.vorname)
+
+                    nachname = st.text_input(
+                        "Nachname", value=patient.nachname)
+
+                    telefon = st.text_input(
+                        "Telefon", value=patient.telefon)
+
+                with col2:
+                    st.subheader("Adresse und Profilbild")
+
+                    strasse = st.text_input(
+                        "Straße", value=patient.adresse["strasse"])
+                
+                    plz = st.text_input(
+                        "PLZ", value=patient.adresse["plz"])
+            
+                    ort = st.text_input(
+                        "Ort", value=patient.adresse["ort"])
         
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.button("Speichern"):
-                #st.write("Button wurde gedrückt")
+                    foto = st.file_uploader(
+                        "Neues Profilbild", type=["png"])
                     
-                update_patienten_daten(
-                    patient.id,
-                    geburtsdatum,
-                    vorname,
-                    nachname,
-                    foto,
-                    telefon,
-                    adresse,
-                    patient.diagnosen,
-                    patient.medikamente)        # diagnosen und medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion!
-                st.success("Änderungen wurden gespeichert.")
-                st.session_state.bearbeiten = False
-                #st.rerun()
-        
-        with col2:
-            if st.button("Abbrechen"):
-                st.session_state.bearbeiten = False
-                st.rerun()
+                    if foto is not None:
+                        st.image(foto, width=160)
 
+                st.divider()
 
+                col_speichern, col_abbrechen = st.columns(2)
 
-    
+                with col_speichern:
+                    speichern = st.form_submit_button("Speichern", use_container_width=True)
+
+                with col_abbrechen:
+                    abbrechen = st.form_submit_button("Abbrechen", use_container_width=True)
+
+                if speichern:
+                    adresse = {
+                        "strasse": strasse,
+                        "plz": plz,
+                        "ort": ort
+                    }
+
+                    update_patienten_daten(
+                        patient.id,
+                        geburtsdatum,
+                        vorname,
+                        nachname,
+                        foto,
+                        telefon,
+                        adresse,
+                        patient.diagnosen, #diagnosen und medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion
+                        patient.medikamente
+                    )
+
+                    st.success("Änderungen wurden gespeichert.")
+                    st.session_state.bearbeiten = False
+                    st.rerun()
+
+                if abbrechen:
+                    st.session_state.bearbeiten = False
+                    st.rerun()
