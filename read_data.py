@@ -1,5 +1,8 @@
 import json
 from datetime import datetime
+from datetime import datetime #damit wir das aktuelle Datum für die CSV Datei bekommen
+from pathlib import Path #damit wir neue Ordner gut erstellen können
+
 
 def load_person_data(person_data_path="data/patienten_daten.json"):
     """Lädt die Patientendaten aus der JSON-Datei."""
@@ -131,13 +134,13 @@ def add_user(username, password, patienten_id):
                   indent = 4,
                   ensure_ascii = False)
 
-def add_datei(patient_id, csv_datei):
+'''def add_datei(patient_id, csv_datei):
     """Speichert hochgeladene Dateien und fügt sie zur JSON Datei hinzu"""
     # die Datei laden:
     with open("data/messungen_datenbank.json", "r", encoding = "utf-8")as file:
         messungen = json.load(file)
     # Namen ersetllen
-    datum = datetime.now().strftime("%Y-%m-%D")
+    datum = datetime.now().strftime("%Y-%m-%d")
     dateiname = f"patient_{patient_id}_{datum}.csv"
     dateipfad = "data/temperatur_messdaten/" + dateiname
 
@@ -163,3 +166,39 @@ def add_datei(patient_id, csv_datei):
             file,
             indent=4,
             ensure_ascii=False)
+'''
+        
+def add_datei(patient_id, csv_datei):
+    '''hier speichern wir eine hochgeladene Temperatur-CSV und ergänzt sie in der Messungsdatenbank'''
+
+    # Bisherige Messungen aus der JSON-Datei laden
+    with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
+        messungen = json.load(file)
+
+    datum = datetime.now().strftime("%Y-%m-%d")
+
+    ordner = Path(f"data/temperatur_messdaten/patient_{patient_id}")
+    
+    ordner.mkdir(parents=True, exist_ok=True) #Ordner automatisch erstellt
+    # parents=True sorgt hier dafür, dass auch alle übergeordneten Ordner erstellt werden,falls nicht da
+    # exist_ok=True kein Fehler wenn ordner schon da
+
+    dateiname = f"patient_{patient_id}_{datum}.csv" 
+
+    dateipfad_speichern = ordner / dateiname #Dateipfad wird hier erstellt
+
+    with open(dateipfad_speichern, "wb") as file:   #hier wird gespeichert
+        file.write(csv_datei.getbuffer())
+
+    messungen.append({  # Neue Messung zur Messungsdatenbank hinzufügen
+        "patient_id": patient_id,
+        "typ": "koerpertemperatur",
+        "datum": datum,
+
+        # Pfad ohne "data/", weil beim Laden später "data/" davor gesetzt wird
+        "dateipfad": f"temperatur_messdaten/patient_{patient_id}/{dateiname}"
+    })
+
+    # Aktualisierte Messungsdatenbank wieder speichern
+    with open("data/messungen_datenbank.json", "w", encoding="utf-8") as file:
+        json.dump(messungen, file, indent=4, ensure_ascii=False)
