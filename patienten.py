@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 from read_data import load_person_data, get_person_list, update_patienten_daten
 from read_data import add_datei
+from datetime import datetime
 
 
 class Person:
@@ -46,7 +47,7 @@ class Person:
 
     def calc_age(self):
         geburtsjahr = int(self.geburtsdatum.split("-")[0])
-        age = 2026 - geburtsjahr
+        age = datetime.now().year - geburtsjahr
         return age
 
     def get_adresse_as_string(self):

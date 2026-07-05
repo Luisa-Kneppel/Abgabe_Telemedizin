@@ -99,17 +99,8 @@ def add_patient(geburtsdatum, vorname, nachname, foto, telefon, adresse):
     }
     patienten.append(neuer_patient)    
 
-    with open(
-        "data/patienten_daten.json",
-        "w",
-        encoding="utf-8"
-    ) as file:
-        json.dump(
-            patienten,
-            file,
-            indent=4,
-            ensure_ascii=False
-        )
+    with open("data/patienten_daten.json", "w", encoding="utf-8") as file:
+        json.dump(patienten, file, indent=4, ensure_ascii=False)
 
     return neue_id
 
@@ -125,48 +116,8 @@ def add_user(username, password, patienten_id):
     }
     users.append(neuer_user)
 
-    with open(
-        "data/user.json",
-        "w",
-        encoding = "utf-8")as file:
-        json.dump(users, 
-                  file,
-                  indent = 4,
-                  ensure_ascii = False)
-
-'''def add_datei(patient_id, csv_datei):
-    """Speichert hochgeladene Dateien und fügt sie zur JSON Datei hinzu"""
-    # die Datei laden:
-    with open("data/messungen_datenbank.json", "r", encoding = "utf-8")as file:
-        messungen = json.load(file)
-    # Namen ersetllen
-    datum = datetime.now().strftime("%Y-%m-%d")
-    dateiname = f"patient_{patient_id}_{datum}.csv"
-    dateipfad = "data/temperatur_messdaten/" + dateiname
-
-    # CSV speichern:
-    with open(dateipfad, "wb") as file:
-        file.write(csv_datei.getbuffer())
-    
-    # in JSON hinzufügen:
-    messungen.append({
-        "patient_id": patient_id,
-        "typ": "koerpertemperatur",
-        "datum": datum,
-        "dateipfad": f"patient_{patient_id}/{dateiname}"})
-    # JSON speichern
-    with open(
-        "data/messungen_datenbank.json",
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            messungen,
-            file,
-            indent=4,
-            ensure_ascii=False)
-'''
+    with open("data/user.json", "w", encoding = "utf-8")as file:
+        json.dump(users, file, indent = 4, ensure_ascii = False)
         
 def add_datei(patient_id, csv_datei):
     '''hier speichern wir eine hochgeladene Temperatur-CSV und ergänzt sie in der Messungsdatenbank'''
@@ -179,7 +130,7 @@ def add_datei(patient_id, csv_datei):
 
     ordner = Path(f"data/temperatur_messdaten/patient_{patient_id}")
     
-    ordner.mkdir(parents=True, exist_ok=True) #Ordner automatisch erstellt
+    ordner.mkdir(parents=True, exist_ok=True) # Ordner automatisch erstellt
     # parents=True sorgt hier dafür, dass auch alle übergeordneten Ordner erstellt werden,falls nicht da
     # exist_ok=True kein Fehler wenn ordner schon da
 
