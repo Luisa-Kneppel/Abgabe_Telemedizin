@@ -1,9 +1,8 @@
 import streamlit as st
 from PIL import Image
-from read_data import load_person_data, get_person_list, update_patienten_daten
+from read_data import load_person_data, update_patienten_daten
 from read_data import add_datei
 from datetime import datetime
-
 
 class Person:
 
@@ -175,7 +174,7 @@ def show_patient(patient_id):
             st.subheader("Persönliche Daten bearbeiten")
             st.caption("Hier können Sie Ihre gespeicherten Kontaktdaten und Ihr Profilbild aktualisieren.")
 
-            with st.form("patient_daten_bearbeiten"): #eingabefelder sind zu einem Formular zsmgefasst
+            with st.form("patient_daten_bearbeiten"): #eingabefelder sind zu einem Formular zusammen gefasst
                 col1, col2 = st.columns(2)
 
                 with col1:
@@ -225,8 +224,7 @@ def show_patient(patient_id):
                     adresse = {
                         "strasse": strasse,
                         "plz": plz,
-                        "ort": ort
-                    }
+                        "ort": ort}
 
                     update_patienten_daten(
                         patient.id,
