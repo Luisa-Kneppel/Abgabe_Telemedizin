@@ -1,4 +1,4 @@
-# hier werden alle Funktionen, die den Login betreffen, geschrieben und erst nachher im main.py implementiert.
+# hier werden alle Funktionen, die den Login und die Registrierung betreffen, geschrieben und erst nachher im main.py implementiert.
 
 import streamlit as st
 from read_data import load_user_data, add_patient, add_user
@@ -6,6 +6,7 @@ from streamlit_authenticator.utilities.hasher import Hasher
 from datetime import date 
 
 def login():
+    '''Steuert die Anzeige der Login- und Registrierungsansicht.'''
 
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
@@ -18,18 +19,22 @@ def login():
 
     if st.session_state.ansicht == "login":
         login_formular()
+
     elif st.session_state.ansicht == "registrieren":
         registrieren()
 
 def login_formular():
+    '''Erzeugt die Login-Ansicht. Je nach gewählter Rolle wird
+    der Patienten- oder der Ärzte-Login angezeigt.'''
+
     st.title("Patientenverwaltung")
     if st.session_state.rolle == "arzt":
         st.subheader("Login - Arzt")
     elif st.session_state.rolle == "patient":
         st.subheader("Login - Patienten")
     
-    # damit die Mitteilung "Registrierung erfolgreich" angezeigt wird,
-    # ohne dem hier würde die Seite direkt neu laden und die Nachricht würde direkt verschwinden
+    # Ohne den Session State würde die Seite direkt neu laden 
+    # und die Nachricht würde sofort verschwinden
     if st.session_state.get("registrierung_erfolgreich"):
         st.toast("Registrierung erfolgreich!")
         del st.session_state["registrierung_erfolgreich"]
@@ -42,12 +47,12 @@ def login_formular():
         users = load_user_data()
 
         for user in users:
-            # zuerst prüfen ob Benutzer im richtigen Login ist (Arzt oder Patient)
+            # Zuerst wird geprüft, ob der Benutzer zur gewählten Rolle gehört.
             if (
                 user["username"] == username
                 and user["rolle"] == st.session_state.rolle
             ):
-            # im nächsten Schritt wird das gehashte Passwort überprüft
+            # Im nächsten Schritt wird das gehashte Passwort überprüft
                 if Hasher.check_pw(password, user["password"]):
 
                     st.session_state.logged_in = True
@@ -55,22 +60,27 @@ def login_formular():
 
                     st.rerun()
 
-        st.error("Benutzername oder Passwort falsch.")      # für den Fall, dass Benutzernamen oder Passwort nicht mit den erwarteten Werten übereinstimmt
+        st.error("Benutzername oder Passwort falsch.")      # Für den Fall, dass Benutzernamen oder Passwort nicht mit den erwarteten Werten übereinstimmt
 
     if st.session_state.rolle == "patient":
-        # damit das neu registrieren nur im Patientendashboard erscheint. Ohne dem würde es auch im Ärztedashboard angezeigt werden
+        # Damit das Registrieren nur im Patientendashboard erscheint. Im Ärztedashboard soll es nicht angezeigt werden.
 
         st.divider()
 
         if st.button("Neu registrieren"):
             st.session_state.ansicht = "registrieren"
             st.rerun()
+
     if st.button("Zurück zur Startseite"):
         st.session_state.rolle = None
         st.session_state.ansicht = "login"
         st.rerun()
 
 def registrieren():
+    '''Ermöglicht neuen Patient:innen die eigenständige Registrierung.
+    Nach erfolgreicher Registrierung werden die Patientendaten gespeichert
+    und zur Login-Ansicht zurückgekehrt.'''
+
     st.title("Patientenverwaltung")
     st.subheader("Registrierung")
 
@@ -83,8 +93,7 @@ def registrieren():
     "Geburtsdatum",
     value= None,
     min_value=date(1900, 1, 1),
-    max_value=date.today()
-    )
+    max_value=date.today())
 
     telefon = st.text_input("Telefon")
     foto = st.file_uploader("Profilbild", type = ["png"])
@@ -114,8 +123,7 @@ def registrieren():
 
     with col1:
         if st.button("Registrieren"):
-            # damit die Registrierung gespeichert wird, werden hier alle Daten geprüft:
-            # die nächste if Bedingung stellt sicher, dass die Daten vollständig sind:
+            # Vor dem Speichern werden alle Eingaben geprüft.
             if (
                 vorname == ""
                 or nachname == ""
@@ -129,16 +137,17 @@ def registrieren():
                 or password2 == ""):
                 st.error("Bitte füllen Sie alle Felder aus.")
                 return
-            # hier wird geprüft ob ein Profilbild hochgeladen wurde (ist Pflicht)
+            # Es wird geprüft, ob ein Profilbild hochgeladen wurde (Pflichtfeld).
             if foto is None:
                 st.error("Bitte laden Sie ein Profilbild hoch.")
                 return
-            # die zwei eingegebenden Passwörter werden verglichen. Bei nicht Übereinstimmung wird eine Fehlermeldung ausgegeben
+            # Die beiden eingegebenen Passwörter werden verglichen. 
+            # Bei Nichtübereinstimmung wird eine Fehlermeldung ausgegeben.
             if password != password2:
                 st.error("Die Passwörter stimmen nicht überein.")
                 return
             
-            # jezt wird geprüft, ob der Benutzer bereits angelegt ist (gesucht wird mitteln Benutzernamen)
+            # Es wird geprüft, ob der Benutzername bereits vergeben ist.
             users = load_user_data()
 
             for user in users:
@@ -146,11 +155,11 @@ def registrieren():
                     st.error("Benutzername ist bereits vergeben.")
                     return
             
-            # hier wird das Passwort gehasht:
+            # Hier wird das Passwort gehasht:
             hashed_password = Hasher.hash(password)
-            # das Datum in einen String umwandeln:
+            # Das Datum in einen String umwandeln:
             geburtsdatum = geburtsdatum.strftime("%Y-%m-%d")
-            # neuen Benutzer anlegen bzw. speichern:
+            # Neuen Patienten und den dazugehörigen Benutzer speichern.
             patient_id = add_patient(
                     geburtsdatum,
                     vorname,
