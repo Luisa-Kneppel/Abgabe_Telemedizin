@@ -1,12 +1,13 @@
 import streamlit as st
 from PIL import Image
-from read_data import load_person_data, get_person_list, update_patienten_daten
+from read_data import load_person_data, update_patienten_daten
 from read_data import add_datei
 from datetime import datetime
 
-
 class Person:
-
+    '''Dient zur objektorientierten Darstellung einer Patient:in.
+    Daten können einfacher in den weiteren Funktionen und Modulen über das 
+    jeweilige Objekt aufgerufen werden.'''
     def __init__(
         self,
         id: int,
@@ -17,8 +18,8 @@ class Person:
         telefon: str,
         adresse: dict,
         medikamente: list,
-        diagnosen: list
-    ):
+        diagnosen: list):
+        '''Initialisiert ein Person-Objekt mit allen gespeicherten Patientendaten.'''
         self.id = id
         self.geburtsdatum = geburtsdatum
         self.vorname = vorname
@@ -30,13 +31,16 @@ class Person:
         self.diagnosen = diagnosen
 
     def get_full_name(self):
+        '''Gibt den vollständigen Namen im Format "Nachname, Vorname" zurück.'''
         return self.nachname + ", " + self.vorname
 
     def get_image(self):
+        '''Lädt das Profilbild und gibt es zurück'''
         image = Image.open(self.foto)
         return image
 
     def load_by_id(self, id):
+        '''Sucht anhand der Patienten-ID das passende Person-Objekt.'''
         persons = get_person_data()
 
         for person in persons:
@@ -46,21 +50,25 @@ class Person:
         return None
 
     def calc_age(self):
+        '''Berechnet das Alter der Patient:in.'''
         geburtsjahr = int(self.geburtsdatum.split("-")[0])
         age = datetime.now().year - geburtsjahr
         return age
 
     def get_adresse_as_string(self):
+        '''Gibt die vollständige Adresse zurück'''
         return (
             self.adresse["strasse"] + ", "
             + self.adresse["plz"] + " "
-            + self.adresse["ort"]
-        )
+            + self.adresse["ort"])
 
     def get_diagnosen_as_string(self):
+        '''Fasst alle Diagnosen zu einem String zusammen'''
         return ", ".join(self.diagnosen)
 
     def get_medikamente_as_string(self):
+        '''Fasst Name, Dosierung und Einnahme aller Medikamente 
+        zu einem String zusammen.'''
         medikamente_liste = []
 
         for medikament in self.medikamente:
@@ -69,16 +77,13 @@ class Person:
                 + " "
                 + medikament["dosis"]
                 + " "
-                + medikament["einnahme"]
-            )
+                + medikament["einnahme"])
 
         return ", ".join(medikamente_liste)
 
 def get_person_data():
-    """
-    Lädt alle Personen aus der JSON-Datei
-    und wandelt sie in Person-Objekte um.
-    """
+    '''Lädt alle Personen aus der JSON-Datei
+    und wandelt sie in Person-Objekte um.'''
     person_data = load_person_data()
 
     person_object_list = []
@@ -101,10 +106,8 @@ def get_person_data():
     return person_object_list
 
 def get_person_object_by_full_name(full_name):
-    """
-    Übergabe: 'Nachname, Vorname'
-    Rückgabe: passendes Person-Objekt
-    """
+    '''Der vollständige Name wird übergeben und das passende Person-Objekt
+    wird zurückgegeben'''
     persons = get_person_data()
 
     firstname = full_name.split(", ")[1]
@@ -117,14 +120,11 @@ def get_person_object_by_full_name(full_name):
     return None
     
 def show_patient(patient_id):
-    """
-    Zeigt die Informationen des Patienten an +  Möglichkeit gewisse Daten abzuändern.
-    """
+    '''Erstellt das Patientendashboard, zeigt die Informationen der 
+    Patient:in an und ermöglicht es gewisse Daten abzuändern.'''
     if "bearbeiten" not in st.session_state:
-        """
-        hier wird der Bearbeitungsmodus angelegt, dadurch, dass Streamlit von 
-        oben nach unten durchläuft, würde sich ansonsten das Formular nicht öffnen!
-        """
+        # hier wird der Bearbeitungsmodus angelegt, dadurch, dass Streamlit von 
+        # oben nach unten durchläuft, würde sich ansonsten das Formular direkt wieder schließen!
         st.session_state.bearbeiten = False
 
     persons = get_person_data()
@@ -165,7 +165,7 @@ def show_patient(patient_id):
             st.success(patient.get_medikamente_as_string())
 
     if not st.session_state.bearbeiten:
-        if st.button("Persönliche Daten bearbeiten"):
+        if st.button("Persönliche Daten bearbeiten"):   # Bearbeitungsmodus muss auf True gesetzt werden, damit das Bearbeitungsformular angezeigt wird
             st.session_state.bearbeiten = True
             st.rerun()
 
@@ -175,7 +175,7 @@ def show_patient(patient_id):
             st.subheader("Persönliche Daten bearbeiten")
             st.caption("Hier können Sie Ihre gespeicherten Kontaktdaten und Ihr Profilbild aktualisieren.")
 
-            with st.form("patient_daten_bearbeiten"): #eingabefelder sind zu einem Formular zsmgefasst
+            with st.form("patient_daten_bearbeiten"): #eingabefelder sind zu einem Formular zusammen gefasst
                 col1, col2 = st.columns(2)
 
                 with col1:
@@ -225,8 +225,7 @@ def show_patient(patient_id):
                     adresse = {
                         "strasse": strasse,
                         "plz": plz,
-                        "ort": ort
-                    }
+                        "ort": ort}
 
                     update_patienten_daten(
                         patient.id,
@@ -237,12 +236,10 @@ def show_patient(patient_id):
                         telefon,
                         adresse,
                         patient.diagnosen, #diagnosen und medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion
-                        patient.medikamente
-                    )
+                        patient.medikamente)
 
                     st.success("Änderungen wurden gespeichert.")
-                    st.session_state.bearbeiten = False
-                    st.rerun()
+                    st.session_state.bearbeiten = False     # Bearbeitungsmodus wird beendet, damit das Formular geschlossen wird.
 
                 if abbrechen:
                     st.session_state.bearbeiten = False

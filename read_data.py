@@ -1,25 +1,24 @@
 import json
-from datetime import datetime
 from datetime import datetime #damit wir das aktuelle Datum für die CSV Datei bekommen
 from pathlib import Path #damit wir neue Ordner gut erstellen können
 
 
 def load_person_data(person_data_path="data/patienten_daten.json"):
-    """Lädt die Patientendaten aus der JSON-Datei."""
+    '''Lädt die Patientendaten aus der JSON-Datei.'''
     with open(person_data_path, "r", encoding="utf-8") as file:
         person_data = json.load(file)
 
     return person_data
 
 def load_user_data(user_data_path="data/user.json"):
-    """Lädt die Benutzerdaten aus der JSON-Datei."""
+    '''Lädt die Benutzerdaten aus der JSON-Datei.'''
     with open(user_data_path, "r", encoding="utf-8") as file:
         user_data = json.load(file)
 
     return user_data
 
 def get_person_list(person_data):
-    """Gibt eine Liste aller Patientennamen im Format 'Nachname, Vorname' zurück."""
+    '''Gibt eine Liste aller Patientennamen im Format 'Nachname, Vorname' zurück.'''
     list_of_names = []
 
     for eintrag in person_data:
@@ -28,10 +27,7 @@ def get_person_list(person_data):
     return list_of_names
 
 def find_person_data_by_name(suchstring):
-    """
-    Übergabe: 'Nachname, Vorname'
-    Rückgabe: passende Person als Dictionary
-    """
+    '''Übergibt einen Namen im Format "Nachname, Vorname" und gibt die passende Person als Dictionary zurück.'''
     person_data = load_person_data()
 
     if suchstring == "None":
@@ -48,10 +44,11 @@ def find_person_data_by_name(suchstring):
     return {}
 
 def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, telefon, adresse, diagnosen, medikamente):
+    '''Aktualisiert die Patientendaten anhand der Patienten-ID.'''
     patienten = load_person_data()
 
     for patient in patienten:
-        # wir übergeben der Funktion eine Patienten_ID, hier wird der richtige Patient dann ausgewählt
+        # Anhand der übergebenen Patienten-ID wird der richtige Patient ausgewählt.
         if patient["id"] == patient_id:
             patient["geburtsdatum"] = geburtsdatum
             patient["vorname"] = vorname
@@ -60,7 +57,7 @@ def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, te
             if foto is not None: 
                 bildpfad = f"data/pictures/patient_{patient_id}.png"
                 with open(bildpfad, "wb") as file:      # wb = write binary, also das Bild besteht aus binärdaten
-                    file.write(foto.getbuffer())    # das Bild wird aus dem Arbeitsspeicher geholt
+                    file.write(foto.getbuffer())    # Das hochgeladene Bild wird aus dem Arbeitsspeicher gelesen.
 
                 patient["foto"] = bildpfad
 
@@ -71,10 +68,9 @@ def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, te
 
             break
 
-        # die neuen Daten in die JSON Datei übernehmen:
-
+    # Die aktualisierten Daten werden in der JSON-Datei gespeichert:
     with open("data/patienten_daten.json", "w", encoding="utf-8")as file: 
-        json.dump(patienten, file, indent=4, ensure_ascii=False)        # durch das ensure_ascii werden die Namen schön dargebstellt (Ü;Ö;Ä), durch intent = 4 wird das JSON übersichtlich dargestellt (nicht alles in einer Zeile)
+        json.dump(patienten, file, indent=4, ensure_ascii=False)        # ensure_ascii sorgt dafür, dass Umlaute dargestellt werden, durch indent = 4 wird das JSON übersichtlich dargestellt (nicht alles in einer Zeile)
 
 def update_medizinische_daten(patient_id, diagnosen, medikamente):
     """ Aktualisiert Diagnosen und Medikamente """
@@ -91,9 +87,9 @@ def update_medizinische_daten(patient_id, diagnosen, medikamente):
         json.dump(patienten, file, indent=4, ensure_ascii=False)
 
 def add_patient(geburtsdatum, vorname, nachname, foto, telefon, adresse):
-    """diese Funktion fügt einen neuen Patienten zur JSON Datei hinzu"""
+    '''Fügt einen neuen Patienten zur JSON-Datei hinzu'''
     patienten = load_person_data()
-    neue_id = max(patient["id"] for patient in patienten) + 1   #dadurch bekommt der neu angelegte Patient die folgende ID
+    neue_id = max(patient["id"] for patient in patienten) + 1   # Der neu angelegte Patient erhält automatisch die nächste freie ID.
 
     # Profilbild speichern
     bildpfad = f"data/pictures/patient_{neue_id}.png"
@@ -119,7 +115,7 @@ def add_patient(geburtsdatum, vorname, nachname, foto, telefon, adresse):
     return neue_id
 
 def add_user(username, password, patienten_id):
-    """fügt den neuen Benutzer zur user.json hinzu"""
+    '''Fügt den neuen Benutzer zur user.json hinzu'''
     users = load_user_data()
     
     neuer_user = {
@@ -134,7 +130,7 @@ def add_user(username, password, patienten_id):
         json.dump(users, file, indent = 4, ensure_ascii = False)
         
 def add_datei(patient_id, csv_datei):
-    '''hier speichern wir eine hochgeladene Temperatur-CSV und ergänzt sie in der Messungsdatenbank'''
+    '''Speichert die hochgeladene CSV-Datei und ergänzt die Messungsdatenbank.'''
 
     # Bisherige Messungen aus der JSON-Datei laden
     with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
@@ -144,15 +140,15 @@ def add_datei(patient_id, csv_datei):
 
     ordner = Path(f"data/temperatur_messdaten/patient_{patient_id}")
     
-    ordner.mkdir(parents=True, exist_ok=True) # Ordner automatisch erstellt
+    ordner.mkdir(parents=True, exist_ok=True) # Ordner wird bei Bedarf automatisch erstellt
     # parents=True sorgt hier dafür, dass auch alle übergeordneten Ordner erstellt werden,falls nicht da
     # exist_ok=True kein Fehler wenn ordner schon da
 
     dateiname = f"patient_{patient_id}_{datum}.csv" 
 
-    dateipfad_speichern = ordner / dateiname #Dateipfad wird hier erstellt
+    dateipfad_speichern = ordner / dateiname # Dateipfad wird hier erstellt
 
-    with open(dateipfad_speichern, "wb") as file:   #hier wird gespeichert
+    with open(dateipfad_speichern, "wb") as file:   # CSV dauerhaft speichern
         file.write(csv_datei.getbuffer())
 
     messungen.append({  # Neue Messung zur Messungsdatenbank hinzufügen
