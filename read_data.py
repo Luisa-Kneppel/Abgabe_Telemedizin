@@ -76,6 +76,20 @@ def update_patienten_daten(patient_id, geburtsdatum, vorname, nachname, foto, te
     with open("data/patienten_daten.json", "w", encoding="utf-8")as file: 
         json.dump(patienten, file, indent=4, ensure_ascii=False)        # durch das ensure_ascii werden die Namen schön dargebstellt (Ü;Ö;Ä), durch intent = 4 wird das JSON übersichtlich dargestellt (nicht alles in einer Zeile)
 
+def update_medizinische_daten(patient_id, diagnosen, medikamente):
+    """ Aktualisiert Diagnosen und Medikamente """
+
+    patienten = load_person_data()
+
+    for patient in patienten:
+        if patient["id"] == patient_id:
+            patient["diagnosen"] = diagnosen
+            patient["medikamente"] = medikamente
+            break
+
+    with open("data/patienten_daten.json", "w", encoding="utf-8") as file:
+        json.dump(patienten, file, indent=4, ensure_ascii=False)
+
 def add_patient(geburtsdatum, vorname, nachname, foto, telefon, adresse):
     """diese Funktion fügt einen neuen Patienten zur JSON Datei hinzu"""
     patienten = load_person_data()

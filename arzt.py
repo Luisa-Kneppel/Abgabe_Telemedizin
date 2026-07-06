@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import plotly.express as px 
 import streamlit as st
-from read_data import load_person_data, get_person_list
+from read_data import load_person_data, get_person_list, update_medizinische_daten
 from patienten import get_person_object_by_full_name
 import plotly.graph_objects as go
 
@@ -10,19 +10,22 @@ TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
 
 def show_patientenansicht_arzt():
     # hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen
+    if "medizin_bearbeiten" not in st.session_state:
+        st.session_state["medizin_bearbeiten"] = False
 
     patienten_data = load_person_data()
     person_names = get_person_list(patienten_data)
+
     st.subheader("Patientendaten")
     selected_person = st.selectbox("Patient:in auswählen", person_names)
 
     patient = get_person_object_by_full_name(selected_person)
-    
+
     with st.container(border=True):
         col1, col2, col3 = st.columns([1, 2, 2])
 
         with col1:
-            st.image(patient.foto, width=180)
+            st.image(patient.foto, width=150)
 
         with col2:
             st.subheader(patient.get_full_name())
@@ -33,11 +36,104 @@ def show_patientenansicht_arzt():
 
         with col3:
             st.write("**Diagnosen:**")
-            st.write(patient.get_diagnosen_as_string())
+
+            for diagnose in patient.diagnosen:
+                st.write("- " + diagnose)
 
             st.write("**Medikamente:**")
-            st.write(patient.get_medikamente_as_string())
-        
+
+            medikamente_tabelle = []
+
+            for medikament in patient.medikamente:
+                medikamente_tabelle.append({
+                    "Name": medikament["name"],
+                    "Dosis": medikament["dosis"],
+                    "Einnahme": medikament["einnahme"]
+                })
+
+            st.dataframe(
+                medikamente_tabelle,
+                hide_index=True,
+                width="stretch"
+            )
+
+            if not st.session_state["medizin_bearbeiten"]: #Button zum bearbeiten der medizinischen Daten
+                if st.button("Medizinische Daten bearbeiten"):
+                    st.session_state["medizin_bearbeiten"] = True
+                    st.rerun()
+
+    if st.session_state["medizin_bearbeiten"]:
+        with st.container(border=True):
+            st.subheader("Medizinische Daten bearbeiten")
+
+            diagnosen_text = st.text_area(
+                "Diagnosen",
+                value=", ".join(patient.diagnosen)
+            )
+
+            medikamente_zeilen = []
+
+            for medikament in patient.medikamente:
+                medikamente_zeilen.append(
+                    medikament["name"]
+                    + " | "
+                    + medikament["dosis"]
+                    + " | "
+                    + medikament["einnahme"]
+                )
+
+            medikamente_text = st.text_area(
+                "Medikamente",
+                value="\n".join(medikamente_zeilen), #\n ist Zeilenumbruch, Format wie in json
+                help="Bitte pro Zeile ein Medikament im Format: Name | Dosis | Einnahme"
+            )
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                if st.button("Medizinische Daten speichern"):
+                    neue_diagnosen = []
+
+                    for diagnose in diagnosen_text.split(","):
+                        diagnose = diagnose.strip()
+
+                        if diagnose != "":
+                            neue_diagnosen.append(diagnose)
+
+                    neue_medikamente = []
+
+                    for zeile in medikamente_text.split("\n"): #zeilenumbrüche
+                        zeile = zeile.strip() # Leerzeichen am Anfang und Ende entfernen
+
+                        if zeile != "":
+                            teile = zeile.split("|")
+
+                            if len(teile) == 3:
+                                name = teile[0].strip()
+                                dosis = teile[1].strip()
+                                einnahme = teile[2].strip()
+
+                                neue_medikamente.append({
+                                    "name": name,
+                                    "dosis": dosis,
+                                    "einnahme": einnahme
+                                })
+
+                    update_medizinische_daten(
+                        patient.id,
+                        neue_diagnosen,
+                        neue_medikamente
+                    )
+
+                    st.success("Medizinische Daten wurden gespeichert.")
+                    st.session_state["medizin_bearbeiten"] = False
+                    st.rerun()
+
+            with col2:
+                if st.button("Abbrechen"):
+                    st.session_state["medizin_bearbeiten"] = False
+                    st.rerun()
+
     st.divider() #horizontale Trennlinie 
 
     show_temp_auswertung(patient.id)
