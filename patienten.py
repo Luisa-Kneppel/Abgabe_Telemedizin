@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-from read_data import load_person_data, update_patienten_daten
+from read_data import load_person_data, update_patienten_daten, get_mitteilungen
 from read_data import add_datei
 from datetime import datetime
 
@@ -235,7 +235,7 @@ def show_patient(patient_id):
                         foto,
                         telefon,
                         adresse,
-                        patient.diagnosen, #diagnosen und medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion
+                        patient.diagnosen, # Diagnosen und Medikamente wurden hier zwar nicht abgeändert, sind aber trotzdem Parameter der Funktion
                         patient.medikamente)
 
                     st.success("Änderungen wurden gespeichert.")
@@ -255,3 +255,20 @@ def show_patient(patient_id):
         if st.button("Datei hochladen"):
             add_datei(patient.id, datei)
             st.success("Datei erfolgreich hochgeladen.")
+
+    # Benachrichtigungen
+    if st.session_state.get("zeige_mitteilungen"):
+        st.divider()
+        st.subheader("Mitteilungen")
+
+        mitteilungen = get_mitteilungen(patient.id)
+
+        if len(mitteilungen) == 0:
+            st.info("Keine Mitteilungen vorhanden.")
+
+        else:
+            for mitteilung in reversed(mitteilungen):   # Durch reversed wird die neuste Nachricht als erstes angezeigt!
+                with st.container(border = True):
+                    st.write("### " + mitteilung["titel"])
+                    st.caption(mitteilung["datum"])
+                    st.write(mitteilung["text"])
