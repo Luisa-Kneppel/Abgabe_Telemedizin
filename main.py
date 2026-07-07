@@ -47,7 +47,7 @@ with st.sidebar:
         st.write("")
 
     st.markdown("""
-    ### Musterpraxis
+    ### Praxis Dr. Musterfrau
 
     Maximilianstraße 2  
     6020 Innsbruck  

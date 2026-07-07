@@ -14,6 +14,7 @@ def show_patientenansicht_arzt():
 
     if "medizin_bearbeiten" not in st.session_state:
         st.session_state["medizin_bearbeiten"] = False
+        
     if "mitteilung_schreiben" not in st.session_state:
         st.session_state.mitteilung_schreiben = False
 
@@ -168,6 +169,7 @@ def show_patientenansicht_arzt():
     st.divider() #horizontale Trennlinie 
 
     show_temp_auswertung(patient.id)
+
 #Daten laden
 def load_temp_messdaten ():
     ''' wir lesen die Daten aus der json Datei ein (diese hat Zugriff auf die csv)'''
@@ -303,7 +305,6 @@ def get_temp_alarm_summary_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
         anzahl_alarme = len(gruppe)
         max_temperatur = gruppe["Temperatur"].max()
         erste_auffaelligkeit = gruppe["Uhrzeit"].min()
-        #letzte_auffaelligkeit = gruppe["Uhrzeit"].max()
         max_temperatur = gruppe["Temperatur"].max()
         schweregrad = get_temp_schweregrad(max_temperatur)
 
@@ -460,7 +461,7 @@ def show_temp_tag_auswahl(temp_liste):
     show_temp_alarm_info_ein_tag(df_temp)
 
 def show_temp_auswertung(patienten_id):
-    # alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen
+    '''alles zusammenfassen zu den Grafiken um in anzeige() nicht so viel reinschreiben zu müssen'''
     temp_liste = get_temp_messdaten_by_id(patienten_id)
 
     if len(temp_liste) == 0:
