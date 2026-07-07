@@ -162,7 +162,10 @@ def show_patient(patient_id):
             st.info(patient.get_diagnosen_as_string())
 
             st.write("**Medikamente:**")
-            st.success(patient.get_medikamente_as_string())
+            if patient.medikamente:
+                st.success(patient.get_medikamente_as_string())
+            else:
+                st.info("Keine Medikamente eingetragen.")
 
     if not st.session_state.bearbeiten:
         if st.button("Persönliche Daten bearbeiten"):   # Bearbeitungsmodus muss auf True gesetzt werden, damit das Bearbeitungsformular angezeigt wird
@@ -240,6 +243,7 @@ def show_patient(patient_id):
 
                     st.success("Änderungen wurden gespeichert.")
                     st.session_state.bearbeiten = False     # Bearbeitungsmodus wird beendet, damit das Formular geschlossen wird.
+                    # st.rerun() 
 
                 if abbrechen:
                     st.session_state.bearbeiten = False

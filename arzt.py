@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px 
 import streamlit as st
 import plotly.graph_objects as go
-from read_data import load_person_data, get_person_list, update_medizinische_daten
+from read_data import load_person_data, get_person_list, update_medizinische_daten, add_mitteilung, load_mitteilungen
 from patienten import get_person_object_by_full_name
 
 TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
@@ -14,6 +14,8 @@ def show_patientenansicht_arzt():
 
     if "medizin_bearbeiten" not in st.session_state:
         st.session_state["medizin_bearbeiten"] = False
+    if "mitteilung_schreiben" not in st.session_state:
+        st.session_state.mitteilung_schreiben = False
 
     patienten_data = load_person_data()
     person_names = get_person_list(patienten_data)
@@ -28,6 +30,11 @@ def show_patientenansicht_arzt():
 
         with col1:
             st.image(patient.foto, width=150)
+            st.divider()
+
+            if st.button("Kontaktieren"):
+                st.session_state.mitteilung_schreiben = True
+                st.rerun()
 
         with col2:
             st.subheader(patient.get_full_name())
@@ -66,6 +73,25 @@ def show_patientenansicht_arzt():
                 if st.button("Medizinische Daten bearbeiten"):
                     st.session_state["medizin_bearbeiten"] = True
                     st.rerun()
+    
+    if st.session_state.mitteilung_schreiben:
+        with st.container(border=True):
+            st.subheader("Mitteilung schreiben")
+            titel = st.text_input("Titel")
+            text = st.text_area("Nachricht")
+            senden, abbrechen = st.columns(2)
+            with senden:
+                if st.button("Senden"):
+                    add_mitteilung(patient.id,
+                                   titel,
+                                   text)
+                    st.success("Mitteilung wurde gesendet.")
+                    st.session_state.mitteilung_schreiben = False
+                    st.rerun()
+        with abbrechen:
+            if st.button("Abbrechen"):
+                st.session_state.mitteilung_schreiben = False
+                st.rerun()
 
     if st.session_state["medizin_bearbeiten"]:
         with st.container(border=True):
@@ -545,10 +571,54 @@ def show_temp_alarmuebersicht():
 def anzeige_arzt():
     '''die Funktion ist wichtig, da sie die Schnittstelle zur main.py darstellt'''
     
-    tab_patienten,tab_alarme = st.tabs(["Patient:innen", "Alarmübersicht"])
+    tab_patienten,tab_alarme, tab_mitteilungen = st.tabs(["Patient:innen", "Alarmübersicht", "Mitteilungen"])
     
     with tab_patienten:
         show_patientenansicht_arzt()
 
     with tab_alarme:
         show_temp_alarmuebersicht()
+
+    with tab_mitteilungen:
+        anzeige_mitteilungen_arzt()
+
+def anzeige_mitteilungen_arzt():
+    '''Zeigt alle versendeten Mitteilungen.'''
+    mitteilungen = load_mitteilungen()
+    st.subheader("Mitteilungen")
+
+    if "ausgewaehlte_mitteilung_arzt" not in st.session_state:
+        st.session_state.ausgewaehlte_mitteilung_arzt = None
+
+    # Übersicht:
+    if st.session_state.ausgewaehlte_mitteilung_arzt is None:
+
+        if len(mitteilungen) == 0:
+            st.info("Es wurden noch keine Mitteilungen versendet.")
+            return
+
+        for nummer, mitteilung in enumerate(reversed(mitteilungen)):    # Auch hier wieder enumerate damit jeder Mitteilung eine Nummer zugewiesen wird, und reversed, dass die Neuste ganz am Anfang steht
+            with st.container(border=True):
+
+                nachricht, pfeil = st.columns([6, 1])
+
+                with nachricht:
+                    st.write("**" + mitteilung["titel"] + "**")
+                    st.write(mitteilung["patient"])
+                    st.caption(mitteilung["datum"])
+
+                with pfeil:
+                    if st.button(">", key=f"arzt_{nummer}"):
+                        st.session_state.ausgewaehlte_mitteilung_arzt = mitteilung
+                        st.rerun()
+    # Detailansicht:
+    else:
+        mitteilung = st.session_state.ausgewaehlte_mitteilung_arzt
+        st.subheader(mitteilung["titel"])
+        st.write("Patient:in:" + mitteilung["patient"])
+        st.caption(mitteilung["datum"])
+        st.divider()
+        st.write(mitteilung["text"])
+        if st.button("Zurück"):
+            st.session_state.ausgewaehlte_mitteilung_arzt = None
+            st.rerun()

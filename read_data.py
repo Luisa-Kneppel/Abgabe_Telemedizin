@@ -259,8 +259,20 @@ def load_mitteilungen():
 def add_mitteilung(patient_id, titel, text):
     '''Speichert eine neue Mitteilung für eine Patient:in.'''
     mitteilungen = load_mitteilungen()
+    patienten = load_person_data()
+    patient_name = ""
+
+    for patient in patienten:
+        if patient["id"] == patient_id:
+            patient_name = patient["vorname"] + " " + patient["nachname"]
+            break
+
+    if patient_name == "":
+        print("Patient nicht gefunden.")
+        
     mitteilungen.append({
         "patienten_id" : patient_id,
+        "patient" : patient_name,
         "datum" : datetime.now().strftime("%Y-%m-%d"),
         "titel" : titel,
         "text" : text,

@@ -1,16 +1,34 @@
 [
     {
         "patienten_id": 1,
+        "patient": "Marie Müller",
         "datum": "2026-07-01",
         "titel": "Test",
         "text": "Willkommen in der Patientenverwaltung.",
         "gelesen": false
     },
-     {
+    {
         "patienten_id": 1,
+        "patient": "Marie Müller",
         "datum": "2026-07-02",
         "titel": "Termin",
         "text": "Bitte vereinbaren Sie einen Termin.",
+        "gelesen": false
+    },
+    {
+        "patienten_id": 1,
+        "patient": "Marie Müller",
+        "datum": "2026-07-07",
+        "titel": "Test2",
+        "text": "Hallo ich bin ein Test",
+        "gelesen": false
+    },
+    {
+        "patienten_id": 1,
+        "patient": "Marie Müller",
+        "datum": "2026-07-07",
+        "titel": "blabla",
+        "text": "ich bin noch ein test",
         "gelesen": false
     }
 ]

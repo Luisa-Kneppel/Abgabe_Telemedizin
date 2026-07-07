@@ -18,27 +18,30 @@ with st.sidebar:
         if st.button("Logout"):
             st.session_state.clear()
             st.rerun()
+    
+        if st.session_state.get("rolle") == "patient":
+        
+            # Zustände anlegen, sollten sie noch nicht existieren
+            if "patienten_ansicht" not in st.session_state:
+                st.session_state.patienten_ansicht = "uebersicht"
+            if "ausgewaehlte_mitteilung" not in st.session_state:
+                st.session_state.ausgewaehlte_mitteilung = None 
 
-        # Zustände anlegen, sollten sie noch nicht existieren
-        if "patienten_ansicht" not in st.session_state:
-            st.session_state.patienten_ansicht = "uebersicht"
-        if "ausgewaehlte_mitteilung" not in st.session_state:
-            st.session_state.ausgewaehlte_mitteilung = None 
+            # Button hinzufügen
+            username = st.session_state["username"]
+            users = load_user_data()       
+            patient = None
 
-        # Button hinzufügen
-        username = st.session_state["username"]
-        users = load_user_data()       
-        patient_id = None
+            for user in users:
+                if (user["username"] == username):
+                    patient = user["patienten_id"]
+                    break
 
-        for user in users: 
-            if user["username"] == username:
-                patient_id = user["patienten_id"]
-                break
-        anzahl = len(get_mitteilungen(patient_id))
+            anzahl = len(get_mitteilungen(patient))
 
-        if st.button(f"Mitteilungen({anzahl})"):
-            st.session_state.patienten_ansicht = "mitteilungen"
-            st.rerun()
+            if st.button(f"Mitteilungen({anzahl})"):
+                st.session_state.patienten_ansicht = "mitteilungen"
+                st.rerun()
 
     for i in range(8):
         st.write("")
