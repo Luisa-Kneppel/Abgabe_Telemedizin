@@ -127,9 +127,13 @@ def registrieren():
         "Passwort bestätigen",
         type="password")
 
-    col1, col2 = st.columns(2)
+    Registrieren, zurück, platzhalter = st.columns([2,2,10])
 
-    with col1:
+    with zurück:
+        if st.button("Zurück"):
+            st.session_state.ansicht = "login"
+            st.rerun()
+    with Registrieren:
         if st.button("Registrieren"):
             # Vor dem Speichern werden alle Eingaben geprüft.
             if (
@@ -183,8 +187,5 @@ def registrieren():
             st.session_state.ansicht = "login"
             st.rerun()
 
-    with col2:
-        if st.button("Zurück"):
-            st.session_state.ansicht = "login"
-            st.rerun()
+
 
