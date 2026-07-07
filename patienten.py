@@ -260,6 +260,15 @@ def show_mitteilungen(patient_id):
     st.title("Mitteilungen")
     mitteilungen = get_mitteilungen(patient_id)
 
+    if len(mitteilungen) == 0:  
+        st.info("Keine Mitteilungen vorhanden.")
+
+        if st.button("Zurück zur Startseite"):
+                st.session_state.patienten_ansicht = "uebersicht"
+                st.rerun()
+
+        return
+
     if st.session_state.ausgewaehlte_mitteilung is None:
         for nummer, mitteilung in enumerate(reversed(mitteilungen)):    # enumerate weist jeder Nachricht eine Nummer zu, reversed brauchen wir, damit die neuste Nachricht ganz oben angezeigt wird
             with st.container(border=True):
