@@ -3,14 +3,13 @@ import plotly.express as px
 import numpy as np
 import pandas as pd
 from arzt import anzeige_arzt
-from patienten import show_patient
+from patienten import show_patient, show_mitteilungen
 from login import login
 from read_data import load_user_data, get_mitteilungen
 
 st.set_page_config(
     page_title="Patientenverwaltung",
-    layout="wide"
-    )
+    layout="wide")
 
 with st.sidebar:
     st.image("data/pictures/Logo.png", width=150)
@@ -19,29 +18,27 @@ with st.sidebar:
         if st.button("Logout"):
             st.session_state.clear()
             st.rerun()
-    
-        if st.session_state.get("rolle") == "patient":
-            username = st.session_state["username"]
-            users = load_user_data()
-            patient_id = None
-            
-            for user in users:
-                if user["username"] == username:
-                    patient_id = user["patienten_id"]
-                    break
-            anzahl= len([
-                m for m in get_mitteilungen(patient_id)
-                if not m["gelesen"]])
 
-            # Falls der Zustand noch nicht existiert, wird er hier angelegt.
-            if "zeige_mitteilungen" not in st.session_state:
-                st.session_state.zeige_mitteilungen = False 
+        # Zustände anlegen, sollten sie noch nicht existieren
+        if "patienten_ansicht" not in st.session_state:
+            st.session_state.patienten_ansicht = "uebersicht"
+        if "ausgewaehlte_mitteilung" not in st.session_state:
+            st.session_state.ausgewaehlte_mitteilung = None 
 
-            # Durch den Button kann die Anzeige der Mitteilungen ein- und ausgeblendet werden.
-            if st.button(f"Mitteilungen({anzahl})"):
-                # Durch "not" wird der aktuelle Wert umgedreht.
-                # So kann derselbe Button zum Ein- und Ausblenden der Mitteilungen verwendet werden.
-                st.session_state.zeige_mitteilungen = not st.session_state.zeige_mitteilungen
+        # Button hinzufügen
+        username = st.session_state["username"]
+        users = load_user_data()       
+        patient_id = None
+
+        for user in users: 
+            if user["username"] == username:
+                patient_id = user["patienten_id"]
+                break
+        anzahl = len(get_mitteilungen(patient_id))
+
+        if st.button(f"Mitteilungen({anzahl})"):
+            st.session_state.patienten_ansicht = "mitteilungen"
+            st.rerun()
 
     for i in range(8):
         st.write("")
@@ -122,5 +119,8 @@ for user in users:
 if current_user["rolle"] == "arzt":
     anzeige_arzt()
 
-elif current_user["rolle"] == "patient":
+elif st.session_state.patienten_ansicht == "uebersicht":
     show_patient(current_user["patienten_id"])
+
+elif st.session_state.patienten_ansicht == "mitteilungen":
+    show_mitteilungen(current_user["patienten_id"])
