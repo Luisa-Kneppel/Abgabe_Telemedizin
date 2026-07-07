@@ -9,8 +9,8 @@ from patienten import get_person_object_by_full_name
 TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
 
 def show_patientenansicht_arzt():
-    ''' hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen zudem 
-    ist die Funktion für die Bearbeitung der medizinischen Daten umgesetzt'''
+    ''' hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen, zudem
+    bietet die Funktion die Möglichkeit Patienten zu kontaktieren sowie deren medizinischen Daten zu bearbeiten.'''
 
     if "medizin_bearbeiten" not in st.session_state:
         st.session_state["medizin_bearbeiten"] = False
@@ -73,25 +73,6 @@ def show_patientenansicht_arzt():
                 if st.button("Medizinische Daten bearbeiten"):
                     st.session_state["medizin_bearbeiten"] = True
                     st.rerun()
-    
-    if st.session_state.mitteilung_schreiben:
-        with st.container(border=True):
-            st.subheader("Mitteilung schreiben")
-            titel = st.text_input("Titel")
-            text = st.text_area("Nachricht")
-            senden, abbrechen = st.columns(2)
-            with senden:
-                if st.button("Senden"):
-                    add_mitteilung(patient.id,
-                                   titel,
-                                   text)
-                    st.success("Mitteilung wurde gesendet.")
-                    st.session_state.mitteilung_schreiben = False
-                    st.rerun()
-        with abbrechen:
-            if st.button("Abbrechen"):
-                st.session_state.mitteilung_schreiben = False
-                st.rerun()
 
     if st.session_state["medizin_bearbeiten"]:
         with st.container(border=True):
@@ -164,6 +145,25 @@ def show_patientenansicht_arzt():
                 if st.button("Abbrechen"):
                     st.session_state["medizin_bearbeiten"] = False
                     st.rerun()
+    
+    if st.session_state.mitteilung_schreiben:
+        with st.container(border=True):
+            st.subheader("Mitteilung schreiben")
+            titel = st.text_input("Titel")
+            text = st.text_area("Nachricht")
+            senden, abbrechen = st.columns(2)
+            with senden:
+                if st.button("Senden"):
+                    add_mitteilung(patient.id,
+                                   titel,
+                                   text)
+                    st.success("Mitteilung wurde gesendet.")
+                    st.session_state.mitteilung_schreiben = False
+                    st.rerun()
+        with abbrechen:
+            if st.button("Abbrechen"):
+                st.session_state.mitteilung_schreiben = False
+                st.rerun()
 
     st.divider() #horizontale Trennlinie 
 

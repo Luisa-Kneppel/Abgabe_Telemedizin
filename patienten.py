@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
-from read_data import load_person_data, update_patienten_daten, get_mitteilungen
-from read_data import add_datei
+from read_data import load_person_data, update_patienten_daten, get_mitteilungen, add_datei
 from datetime import datetime
 
 class Person:
