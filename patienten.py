@@ -257,13 +257,14 @@ def show_patient(patient_id):
             st.success("Datei erfolgreich hochgeladen.")
 
 def show_mitteilungen(patient_id):
+    '''Erzeugt eine Ansicht in der die Mitteilungen einer Patient:in angezeigt werden.'''
     st.title("Mitteilungen")
     mitteilungen = get_mitteilungen(patient_id)
 
     if len(mitteilungen) == 0:  
         st.info("Keine Mitteilungen vorhanden.")
 
-        if st.button("Zurück zur Startseite"):
+        if st.button("Zurück zum Patientenbereich"):
                 st.session_state.patienten_ansicht = "uebersicht"
                 st.rerun()
 
@@ -280,7 +281,10 @@ def show_mitteilungen(patient_id):
                     if st.button(">", key=nummer):
                         st.session_state.ausgewaehlte_mitteilung = mitteilung
                         st.rerun()
-
+        st.divider()
+        if st.button("Zurück zum Patientenbereich"):
+            st.session_state.patienten_ansicht = "uebersicht"
+            st.rerun()
 
     else:
         mitteilung = st.session_state.ausgewaehlte_mitteilung
@@ -288,12 +292,14 @@ def show_mitteilungen(patient_id):
         st.caption(mitteilung["datum"])
         st.write(mitteilung["text"])
 
-        if st.button("Zurück"):
-            st.session_state.ausgewaehlte_mitteilung = None
-            st.rerun()
-    
-    st.divider()
-    if st.button("Zurück zur Startseite"):
-        st.session_state.patienten_ansicht = "uebersicht"
-        st.session_state.ausgewaehlte_mitteilung = None
-        st.rerun()
+        st.divider()
+        zurueck, zurueck_zur_startseite, platzhalter = st.columns([2,2,11])
+        with zurueck:
+            if st.button("Zurück"):
+                st.session_state.ausgewaehlte_mitteilung = None
+                st.rerun()
+        with zurueck_zur_startseite:
+            if st.button("Patientenbereich"):
+                st.session_state.patienten_ansicht = "uebersicht"
+                st.session_state.ausgewaehlte_mitteilung = None
+                st.rerun()

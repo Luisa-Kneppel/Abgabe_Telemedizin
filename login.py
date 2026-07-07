@@ -66,15 +66,23 @@ def login_formular():
         # Damit das Registrieren nur im Patientendashboard erscheint. Im Ärztedashboard soll es nicht angezeigt werden.
 
         st.divider()
+        neuer_benutzer, zurück, platzhalter = st.columns([2,2,8])
+        with neuer_benutzer:
+            if st.button("Neu registrieren"):
+                st.session_state.ansicht = "registrieren"
+                st.rerun()
+        with zurück:
+            if st.button("Zurück zur Startseite"):
+                st.session_state.rolle = None
+                st.session_state.ansicht = "login"
+                st.rerun()
 
-        if st.button("Neu registrieren"):
-            st.session_state.ansicht = "registrieren"
+    if st.session_state.rolle == "arzt":
+        st.divider()
+        if st.button("Zurück zur Startseite"):
+            st.session_state.rolle = None
+            st.session_state.ansicht = "login"
             st.rerun()
-
-    if st.button("Zurück zur Startseite"):
-        st.session_state.rolle = None
-        st.session_state.ansicht = "login"
-        st.rerun()
 
 def registrieren():
     '''Ermöglicht neuen Patient:innen die eigenständige Registrierung.

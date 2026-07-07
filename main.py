@@ -1,7 +1,7 @@
 import streamlit as st
-import plotly.express as px
-import numpy as np
-import pandas as pd
+#import plotly.express as px
+#import numpy as np
+#import pandas as pd
 from arzt import anzeige_arzt
 from patienten import show_patient, show_mitteilungen
 from login import login
@@ -111,8 +111,7 @@ current_user = None
 
 for user in users:
     if (user["username"] == username
-    and user["rolle"] == st.session_state.rolle
-        ):
+    and user["rolle"] == st.session_state.rolle):
         current_user = user
         break
 
