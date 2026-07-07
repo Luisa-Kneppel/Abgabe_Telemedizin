@@ -2,33 +2,57 @@
     {
         "patienten_id": 1,
         "patient": "Marie Müller",
-        "datum": "2026-07-01",
-        "titel": "Test",
-        "text": "Willkommen in der Patientenverwaltung.",
+        "datum": "2026-06-28",
+        "titel": "Terminvereinbarung",
+        "text": "Bitte vereinbaren Sie in den nächsten zwei Wochen einen Kontrolltermin in unserer Praxis.",
         "gelesen": false
     },
     {
         "patienten_id": 1,
         "patient": "Marie Müller",
         "datum": "2026-07-02",
-        "titel": "Termin",
-        "text": "Bitte vereinbaren Sie einen Termin.",
+        "titel": "Medizinische Daten aktualisiert",
+        "text": "Ihre medizinischen Daten wurden durch Ihre Ärztin bzw. Ihren Arzt aktualisiert. Bitte überprüfen Sie die Änderungen in Ihrem Patientenbereich.",
+        "gelesen": true
+    },
+    {
+        "patienten_id": 2,
+        "patient": "Anna Schmidt",
+        "datum": "2026-07-01",
+        "titel": "Medikamentenplan aktualisiert",
+        "text": "Ihr Medikamentenplan wurde angepasst. Bitte beachten Sie die aktualisierten Angaben in Ihrem Patientenbereich.",
         "gelesen": false
     },
     {
-        "patienten_id": 1,
-        "patient": "Marie Müller",
-        "datum": "2026-07-07",
-        "titel": "Test2",
-        "text": "Hallo ich bin ein Test",
+        "patienten_id": 4,
+        "patient": "Laura Fischer",
+        "datum": "2026-07-03",
+        "titel": "Kontrolluntersuchung",
+        "text": "Bitte vereinbaren Sie einen Termin zur Nachkontrolle Ihrer Allergiebehandlung.",
         "gelesen": false
     },
     {
-        "patienten_id": 1,
-        "patient": "Marie Müller",
-        "datum": "2026-07-07",
-        "titel": "blabla",
-        "text": "ich bin noch ein test",
+        "patienten_id": 5,
+        "patient": "Jonas Keller",
+        "datum": "2026-07-04",
+        "titel": "Laborwerte eingetroffen",
+        "text": "Ihre aktuellen Laborwerte liegen vor. Bitte vereinbaren Sie einen Termin zur Besprechung.",
+        "gelesen": true
+    },
+    {
+        "patienten_id": 7,
+        "patient": "Sophie Hoffmann",
+        "datum": "2026-07-05",
+        "titel": "Diagnose aktualisiert",
+        "text": "Ihre Diagnosen wurden aktualisiert. Bitte informieren Sie sich über die Änderungen in Ihrem Patientenbereich.",
+        "gelesen": false
+    },
+    {
+        "patienten_id": 7,
+        "patient": "Sophie Hoffmann",
+        "datum": "2026-07-06",
+        "titel": "Bitte Rückmeldung",
+        "text": "Bitte geben Sie uns eine kurze Rückmeldung, ob die Beschwerden weiterhin bestehen.",
         "gelesen": false
     }
 ]

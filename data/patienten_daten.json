@@ -102,6 +102,11 @@
                 "name": "Metformin",
                 "dosis": "500 mg",
                 "einnahme": "1-0-1"
+            },
+            {
+                "name": "Empagliflozin",
+                "dosis": "10 mg",
+                "einnahme": "1-0-0"
             }
         ],
         "diagnosen": [

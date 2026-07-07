@@ -138,6 +138,9 @@ def show_patientenansicht_arzt():
                         neue_medikamente
                     )
 
+                    add_mitteilung(patient.id, "Änderung Medizinische Daten",
+                                   "Ihre medizinischen Daten wurden durch Ihre Ärztin bzw. Ihren Arzt aktualisiert. Bitte überprüfen Sie die Änderungen in Ihrem Patientenbereich. Wenden Sie sich bei Fragen an Ihre Ärztin bzw. Ihren Arzt.")
+
                     st.success("Medizinische Daten wurden gespeichert.")
                     st.session_state["medizin_bearbeiten"] = False
                     st.rerun()
