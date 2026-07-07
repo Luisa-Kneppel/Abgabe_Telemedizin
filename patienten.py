@@ -242,7 +242,7 @@ def show_patient(patient_id):
 
                     st.success("Änderungen wurden gespeichert.")
                     st.session_state.bearbeiten = False     # Bearbeitungsmodus wird beendet, damit das Formular geschlossen wird.
-                    # st.rerun() 
+                    st.rerun() 
 
                 if abbrechen:
                     st.session_state.bearbeiten = False
