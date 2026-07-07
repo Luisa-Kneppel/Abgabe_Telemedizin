@@ -178,10 +178,10 @@ def pruefe_temp_csv(csv_datei):
         return False, "Die Datei konnte nicht als CSV gelesen werden."
 
     if list(df.columns) != ["uhrzeit", "temperatur"]:
-        return False, "Die CSV-Datei muss genau die Spalten 'uhrzeit' und 'temperatur' enthalten."
+        return False, "Die CSV-Datei muss genau die Spalten 'uhrzeit' und 'temperatur' enthalten. Bitte überprüfen Sie ihre Datei"
 
     if len(df) != 24:
-        return False, "Die CSV-Datei muss genau 24 Messwerte enthalten."
+        return False, "Die CSV-Datei muss genau 24 Messwerte enthalten. Bitte überprüfen Sie ihre Datei"
 
     if df.isna().any().any(): #prüft auf leere Werte
         return False, "Die CSV-Datei enthält leere Werte."
@@ -189,7 +189,7 @@ def pruefe_temp_csv(csv_datei):
     try:
         df["temperatur"] = pd.to_numeric(df["temperatur"])
     except Exception:
-        return False, "Die Spalte 'temperatur' darf nur Zahlen enthalten."
+        return False, "Die Spalte 'temperatur' darf nur Zahlen enthalten. Bitte überprüfen Sie ihre Datei"
 
     erwartete_uhrzeiten = []
 
@@ -197,7 +197,7 @@ def pruefe_temp_csv(csv_datei):
         erwartete_uhrzeiten.append(f"{stunde:02d}:00")
 
     if list(df["uhrzeit"]) != erwartete_uhrzeiten:
-        return False, "Die Uhrzeiten müssen im Stundentakt angegeben sein."
+        return False, "Die Uhrzeiten müssen im Stundentakt angegeben sein. Bitte überprüfen Sie ihre Datei "
 
     return True, "CSV-Datei ist gültig."
 
