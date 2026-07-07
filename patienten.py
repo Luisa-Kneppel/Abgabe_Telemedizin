@@ -256,19 +256,35 @@ def show_patient(patient_id):
             add_datei(patient.id, datei)
             st.success("Datei erfolgreich hochgeladen.")
 
-    # Benachrichtigungen
-    if st.session_state.get("zeige_mitteilungen"):
-        st.divider()
-        st.subheader("Mitteilungen")
+def show_mitteilungen(patient_id):
+    st.title("Mitteilungen")
+    mitteilungen = get_mitteilungen(patient_id)
 
-        mitteilungen = get_mitteilungen(patient.id)
-
-        if len(mitteilungen) == 0:
-            st.info("Keine Mitteilungen vorhanden.")
-
-        else:
-            for mitteilung in reversed(mitteilungen):   # Durch reversed wird die neuste Nachricht als erstes angezeigt!
-                with st.container(border = True):
-                    st.write("### " + mitteilung["titel"])
+    if st.session_state.ausgewaehlte_mitteilung is None:
+        for nummer, mitteilung in enumerate(reversed(mitteilungen)):    # enumerate weist jeder Nachricht eine Nummer zu, reversed brauchen wir, damit die neuste Nachricht ganz oben angezeigt wird
+            with st.container(border=True):
+                nachricht, oeffnen = st.columns([5,1])
+                with nachricht:
+                    st.write("**" + mitteilung["titel"] + "**")
                     st.caption(mitteilung["datum"])
-                    st.write(mitteilung["text"])
+                with oeffnen:
+                    if st.button(">", key=nummer):
+                        st.session_state.ausgewaehlte_mitteilung = mitteilung
+                        st.rerun()
+
+
+    else:
+        mitteilung = st.session_state.ausgewaehlte_mitteilung
+        st.subheader(mitteilung["titel"])
+        st.caption(mitteilung["datum"])
+        st.write(mitteilung["text"])
+
+        if st.button("Zurück"):
+            st.session_state.ausgewaehlte_mitteilung = None
+            st.rerun()
+    
+    st.divider()
+    if st.button("Zurück zur Startseite"):
+        st.session_state.patienten_ansicht = "uebersicht"
+        st.session_state.ausgewaehlte_mitteilung = None
+        st.rerun()
