@@ -163,3 +163,31 @@ def add_datei(patient_id, csv_datei):
     # Aktualisierte Messungsdatenbank wieder speichern
     with open("data/messungen_datenbank.json", "w", encoding="utf-8") as file:
         json.dump(messungen, file, indent=4, ensure_ascii=False)
+        
+def load_mitteilungen():
+    '''Lädt alle Mitteilungen.'''
+    with open("data/mitteilungen.json", "r", encoding="utf-8") as file:
+        return json.load(file)
+    
+def add_mitteilung(patient_id, titel, text):
+    '''Speichert eine neue Mitteilung für eine Patient:in.'''
+    mitteilungen = load_mitteilungen()
+    mitteilungen.append({
+        "patienten_id" : patient_id,
+        "datum" : datetime.now().strftime("%Y-%m-%d"),
+        "titel" : titel,
+        "text" : text,
+        "gelesen" : False})
+    
+    with open("data/mitteilungen.json", "w", encoding="utf-8") as file:
+        json.dump(mitteilungen, file, indent=4, ensure_ascii=False)
+    
+def get_mitteilungen(patienten_id):
+    '''Gibt die Mitteilungen einer Patient:in zurück.'''
+    mitteilungen = load_mitteilungen()
+    patient_mitteilungen = []       # Leere Liste erstellen, darin werden später die Mitteilungen abgelegt.
+
+    for mitteilung in mitteilungen:
+        if mitteilung["patienten_id"] == patienten_id:
+            patient_mitteilungen.append(mitteilung)
+    return patient_mitteilungen
