@@ -38,24 +38,27 @@ def show_patientenansicht_arzt():
             st.write("**Diagnosen:**")
 
             for diagnose in patient.diagnosen:
-                st.write("- " + diagnose)
+                st.write(diagnose)
 
             st.write("**Medikamente:**")
 
-            medikamente_tabelle = []
+            if len(patient.medikamente) == 0:
+                st.info("Keine Medikamente eingetragen.")
+            else:
+                medikamente_tabelle = []
 
-            for medikament in patient.medikamente:
-                medikamente_tabelle.append({
-                    "Name": medikament["name"],
-                    "Dosis": medikament["dosis"],
-                    "Einnahme": medikament["einnahme"]
-                })
+                for medikament in patient.medikamente:
+                    medikamente_tabelle.append({
+                        "Name": medikament["name"],
+                        "Dosis": medikament["dosis"],
+                        "Einnahme": medikament["einnahme"]
+                    })
 
-            st.dataframe(
-                medikamente_tabelle,
-                hide_index=True,
-                width="stretch"
-            )
+                st.dataframe(
+                    medikamente_tabelle,
+                    hide_index=True,
+                    width="stretch"
+                )
 
             if not st.session_state["medizin_bearbeiten"]: #Button zum bearbeiten der medizinischen Daten
                 if st.button("Medizinische Daten bearbeiten"):
@@ -68,25 +71,30 @@ def show_patientenansicht_arzt():
 
             diagnosen_text = st.text_area(
                 "Diagnosen",
-                value=", ".join(patient.diagnosen)
+                value=", ".join(patient.diagnosen),
+                help="Mehrere Diagnosen bitte mit Komma trennen."
             )
 
-            medikamente_zeilen = []
+            medikamente_tabelle = []
 
             for medikament in patient.medikamente:
-                medikamente_zeilen.append(
-                    medikament["name"]
-                    + " | "
-                    + medikament["dosis"]
-                    + " | "
-                    + medikament["einnahme"]
-                )
+                medikamente_tabelle.append({
+                    "Name": medikament["name"],
+                    "Dosis": medikament["dosis"],
+                    "Einnahme": medikament["einnahme"]
+                })
 
-            medikamente_text = st.text_area(
-                "Medikamente",
-                value="\n".join(medikamente_zeilen), #\n ist Zeilenumbruch, Format wie in json
-                help="Bitte pro Zeile ein Medikament im Format: Name | Dosis | Einnahme"
-            )
+            if len(medikamente_tabelle) == 0: #leere Tabelle/ df erstellen, wenn keine Medikamente vorhanden sind
+                df_medikamente = pd.DataFrame(columns=["Name", "Dosis", "Einnahme"])
+            else:
+                df_medikamente = pd.DataFrame(medikamente_tabelle)
+
+            medikamente_bearbeitet = st.data_editor(
+                df_medikamente,
+                num_rows="dynamic",
+                hide_index=True,
+                width="stretch"
+)
 
             col1, col2 = st.columns(2)
 
@@ -102,22 +110,17 @@ def show_patientenansicht_arzt():
 
                     neue_medikamente = []
 
-                    for zeile in medikamente_text.split("\n"): #zeilenumbrüche
-                        zeile = zeile.strip() # Leerzeichen am Anfang und Ende entfernen
+                    for medikament in medikamente_bearbeitet.to_dict("records"):
+                        name = str(medikament["Name"]).strip()
+                        dosis = str(medikament["Dosis"]).strip()
+                        einnahme = str(medikament["Einnahme"]).strip()
 
-                        if zeile != "":
-                            teile = zeile.split("|")
-
-                            if len(teile) == 3:
-                                name = teile[0].strip()
-                                dosis = teile[1].strip()
-                                einnahme = teile[2].strip()
-
-                                neue_medikamente.append({
-                                    "name": name,
-                                    "dosis": dosis,
-                                    "einnahme": einnahme
-                                })
+                        if name != "":
+                            neue_medikamente.append({
+                                "name": name,
+                                "dosis": dosis,
+                                "einnahme": einnahme
+                            })
 
                     update_medizinische_daten(
                         patient.id,
