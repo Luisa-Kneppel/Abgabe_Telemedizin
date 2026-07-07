@@ -248,7 +248,9 @@ def add_datei(patient_id, csv_datei):
         json.dump(messungen, file, indent=4, ensure_ascii=False)
 
     bereinige_alte_messungen(patient_id)
-            
+
+    return True, "Datei wurde erfolgreich hochgeladen."   
+    
 def load_mitteilungen():
     '''Lädt alle Mitteilungen.'''
     with open("data/mitteilungen.json", "r", encoding="utf-8") as file:
