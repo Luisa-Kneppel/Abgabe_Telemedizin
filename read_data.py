@@ -1,6 +1,8 @@
 import json
 from datetime import datetime #damit wir das aktuelle Datum für die CSV Datei bekommen
-from pathlib import Path #damit wir neue Ordner gut erstellen können
+from pathlib import Path
+
+from altair import datum #damit wir neue Ordner gut erstellen können
 
 
 def load_person_data(person_data_path="data/patienten_daten.json"):
@@ -128,7 +130,44 @@ def add_user(username, password, patienten_id):
 
     with open("data/user.json", "w", encoding = "utf-8")as file:
         json.dump(users, file, indent = 4, ensure_ascii = False)
-        
+
+def bereinige_alte_messungen(patient_id, max_anzahl=5):
+    """Begrenzt die Temperaturmessungenpro Person auf max_anzahl=5 Messungen.
+    Ältere Einträge werden aus der JSON-Datei und als CSV-Datei gelöscht"""
+
+    with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
+        messungen = json.load(file)
+
+    patient_messungen = []
+
+    for messung in messungen:
+        if (
+            messung["patient_id"] == patient_id
+            and messung["typ"] == "koerpertemperatur"
+        ):
+            patient_messungen.append(messung)
+
+    patient_messungen = sorted(
+        patient_messungen,
+        key=lambda messung: messung["datum"]
+    )
+
+    if len(patient_messungen) <= max_anzahl:
+        return
+
+    zu_loeschen = patient_messungen[:-max_anzahl]
+
+    for messung in zu_loeschen:
+        datei_zum_loeschen = Path("data") / messung["dateipfad"]
+
+        if datei_zum_loeschen.exists():
+            datei_zum_loeschen.unlink()
+
+        messungen.remove(messung)
+
+    with open("data/messungen_datenbank.json", "w", encoding="utf-8") as file:
+        json.dump(messungen, file, indent=4, ensure_ascii=False)
+
 def add_datei(patient_id, csv_datei):
     '''Speichert die hochgeladene CSV-Datei und ergänzt die Messungsdatenbank.'''
 
@@ -151,19 +190,23 @@ def add_datei(patient_id, csv_datei):
     with open(dateipfad_speichern, "wb") as file:   # CSV dauerhaft speichern
         file.write(csv_datei.getbuffer())
 
-    messungen.append({  # Neue Messung zur Messungsdatenbank hinzufügen
+    neue_messung_id = f"TEMP-P{patient_id}-{datum}"
+
+    messungen.append({ # Neue Messung zur Messungsdatenbank hinzufügen
+        "messung_id": neue_messung_id,
         "patient_id": patient_id,
         "typ": "koerpertemperatur",
         "datum": datum,
-
         # Pfad ohne "data/", weil beim Laden später "data/" davor gesetzt wird
         "dateipfad": f"temperatur_messdaten/patient_{patient_id}/{dateiname}"
     })
 
-    # Aktualisierte Messungsdatenbank wieder speichern
+    # Aktualisierte Messungsdatenbank wieder speichern mit der Bereiningung
     with open("data/messungen_datenbank.json", "w", encoding="utf-8") as file:
         json.dump(messungen, file, indent=4, ensure_ascii=False)
-        
+
+    bereinige_alte_messungen(patient_id)
+            
 def load_mitteilungen():
     '''Lädt alle Mitteilungen.'''
     with open("data/mitteilungen.json", "r", encoding="utf-8") as file:
