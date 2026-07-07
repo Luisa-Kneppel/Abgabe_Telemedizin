@@ -250,11 +250,17 @@ def show_patient(patient_id):
 
     datei = st.file_uploader(
         "CSV-Datei auswählen",
-        type = ["csv"])
+        type=["csv"]
+    )
+
     if datei is not None:
         if st.button("Datei hochladen"):
-            add_datei(patient.id, datei)
-            st.success("Datei erfolgreich hochgeladen.")
+            erfolgreich, meldung = add_datei(patient.id, datei)
+
+            if erfolgreich:
+                st.success(meldung)
+            else:
+                st.error(meldung)
 
 def show_mitteilungen(patient_id):
     '''Erzeugt eine Ansicht in der die Mitteilungen einer Patient:in angezeigt werden.'''

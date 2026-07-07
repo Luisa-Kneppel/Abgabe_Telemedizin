@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 from datetime import datetime #damit wir das aktuelle Datum für die CSV Datei bekommen
 from pathlib import Path
 
@@ -168,8 +169,49 @@ def bereinige_alte_messungen(patient_id, max_anzahl=5):
     with open("data/messungen_datenbank.json", "w", encoding="utf-8") as file:
         json.dump(messungen, file, indent=4, ensure_ascii=False)
 
+def pruefe_temp_csv(csv_datei):
+    """Prüft, ob die hochgeladene Temperatur-CSV das erwartete Format hat."""
+
+    try:
+        df = pd.read_csv(csv_datei)
+    except Exception:
+        return False, "Die Datei konnte nicht als CSV gelesen werden."
+
+    if list(df.columns) != ["uhrzeit", "temperatur"]:
+        return False, "Die CSV-Datei muss genau die Spalten 'uhrzeit' und 'temperatur' enthalten."
+
+    if len(df) != 24:
+        return False, "Die CSV-Datei muss genau 24 Messwerte enthalten."
+
+    if df.isna().any().any(): #prüft auf leere Werte
+        return False, "Die CSV-Datei enthält leere Werte."
+
+    try:
+        df["temperatur"] = pd.to_numeric(df["temperatur"])
+    except Exception:
+        return False, "Die Spalte 'temperatur' darf nur Zahlen enthalten."
+
+    erwartete_uhrzeiten = []
+
+    for stunde in range(24):
+        erwartete_uhrzeiten.append(f"{stunde:02d}:00")
+
+    if list(df["uhrzeit"]) != erwartete_uhrzeiten:
+        return False, "Die Uhrzeiten müssen im Stundentakt angegeben sein."
+
+    return True, "CSV-Datei ist gültig."
+
 def add_datei(patient_id, csv_datei):
     '''Speichert die hochgeladene CSV-Datei und ergänzt die Messungsdatenbank.'''
+
+    ist_gueltig, meldung = pruefe_temp_csv(csv_datei)
+
+    if not ist_gueltig:
+        return False, meldung
+
+    csv_datei.seek(0)
+
+    patient_id = int(patient_id)
 
     # Bisherige Messungen aus der JSON-Datei laden
     with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
