@@ -2,14 +2,16 @@ import json
 import pandas as pd
 import plotly.express as px 
 import streamlit as st
+import plotly.graph_objects as go
 from read_data import load_person_data, get_person_list, update_medizinische_daten
 from patienten import get_person_object_by_full_name
-import plotly.graph_objects as go
 
 TEMP_GRENZWERT=38.0 #zentraler Grenzwert für die Temperaturmessungen
 
 def show_patientenansicht_arzt():
-    # hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen
+    ''' hier werden die Patientendaten geladen und die Patienten ausgewählt, deren Daten angezeigt werden sollen zudem 
+    ist die Funktion für die Bearbeitung der medizinischen Daten umgesetzt'''
+
     if "medizin_bearbeiten" not in st.session_state:
         st.session_state["medizin_bearbeiten"] = False
 
@@ -94,7 +96,7 @@ def show_patientenansicht_arzt():
                 num_rows="dynamic",
                 hide_index=True,
                 width="stretch"
-)
+            )
 
             col1, col2 = st.columns(2)
 
@@ -140,17 +142,16 @@ def show_patientenansicht_arzt():
     st.divider() #horizontale Trennlinie 
 
     show_temp_auswertung(patient.id)
-
 #Daten laden
 def load_temp_messdaten ():
-    # wir lesen die Daten aus der json Datei ein (diese hat Zugriff auf die csv)
+    ''' wir lesen die Daten aus der json Datei ein (diese hat Zugriff auf die csv)'''
     with open("data/messungen_datenbank.json", "r", encoding="utf-8") as file:
         temp_messdaten = json.load(file)
 
     return temp_messdaten
 
 def get_temp_messdaten_by_id(patienten_id):
-    # hier suchen wir alle Temp Messdaten, die zu einer bestimmten ID gehören
+    ''' hier suchen wir alle Temp Messdaten, die zu einer bestimmten ID gehören'''
     temp_messdaten = load_temp_messdaten()
 
     temp_liste = []
@@ -162,7 +163,7 @@ def get_temp_messdaten_by_id(patienten_id):
     return temp_liste 
 
 def load_temp_csv(dateipfad):
-    #lädt die einzelnen csv dateien, teilt ordner ab nur noch Pfad
+    ''' lädt die einzelnen csv dateien, teilt ordner ab nur noch Pfad'''
     full_path = "data/" + dateipfad
     df_temp = pd.read_csv(full_path) #hier df mit den Daten anlegen
 
@@ -170,8 +171,8 @@ def load_temp_csv(dateipfad):
 
 #Start der Berechnungen
 def temp_summary(temp_liste):
-    # wir brauchen für den Trend die wichitgsten Daten der einzelnen Tage
-    # diese Daten erstellen wir hier aus der temp_liste um es später zu plotten
+    ''' wir brauchen für den Trend die wichitgsten Daten der einzelnen Tage
+    diese Daten erstellen wir hier aus der temp_liste um es später zu plotten'''
 
     summary_liste = []
 
@@ -193,16 +194,16 @@ def temp_summary(temp_liste):
     return df_summary
 
 def get_temp_alarme_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
-    #alle Werte, die an einem Tag den Grenzwert überschreiten, 
-    # speichern wir in einem neuen Data Frame Alarme
+    '''alle Werte, die an einem Tag den Grenzwert überschreiten, 
+    speichern wir in einem neuen Data Frame Alarme'''
 
     df_alarme = df_temp[df_temp["temperatur"] >= temp_grenzwert]
 
     return df_alarme
 
 def get_temp_alarme_patient(patienten_id, temp_grenzwert=TEMP_GRENZWERT):
-    #Auflistung aller Alamre für die Patient:in, die den Grenzwert überschreiten
-    # mit zuordnung zur ID
+    '''Auflistung aller Alamre für die Patient:in, die den Grenzwert überschreiten
+    mit zuordnung zur ID'''
 
     temp_liste = get_temp_messdaten_by_id(patienten_id)
 
@@ -228,8 +229,8 @@ def get_temp_alarme_patient(patienten_id, temp_grenzwert=TEMP_GRENZWERT):
     return df_alarme_patient
 
 def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
-    # hier werden alle Alarme aller Patienten zusammengefasst, die den Grenzwert überschreiten  
-    # nicht mehr nur die einzelnen Patienten, Grundlage für Alarm Dashboard
+    ''' hier werden alle Alarme aller Patienten zusammengefasst, die den Grenzwert überschreiten  
+        nicht mehr nur die einzelnen Patienten, Grundlage für Alarm Dashboard'''
     patienten_data = load_person_data()
 
     alle_alarme_liste = []
@@ -255,8 +256,8 @@ def get_temp_alarme_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
     return df_alarme_alle
 
 def get_temp_alarm_summary_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
-    # auf Basis der vorherigen Fkt, aber kompaktere Alarmübersicht, 
-    # sodass es pro Patient und Tag nur eine Tabellenzeile gibt 
+    ''' auf Basis der vorherigen Funktion, aber kompaktere Alarmübersicht, 
+        sodass es pro Patient und Tag nur eine Tabellenzeile gibt '''
 
     df_alarme = get_temp_alarme_alle_patienten(temp_grenzwert)
 
@@ -297,7 +298,7 @@ def get_temp_alarm_summary_alle_patienten(temp_grenzwert=TEMP_GRENZWERT):
     return df_summary
 
 def get_temp_schweregrad(max_temperatur):
-    #Schweregrad des Alarms wird bestimmt
+    '''Schweregrad des Alarms wird bestimmt'''
     if max_temperatur >= 39.0:
         return "hoch"
 
@@ -309,6 +310,7 @@ def get_temp_schweregrad(max_temperatur):
 
 #Plots bzw. Streamlit Ausgabe
 def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
+    ''' hier wird der Trend über die 5 Tage geplottet, mit Durchschnitt, Minimum und Maximum'''
     fig = px.line(
         df_summary,
         x="Datum",
@@ -350,7 +352,7 @@ def plot_temp_summary(df_summary, temp_grenzwert=TEMP_GRENZWERT):
     st.plotly_chart(fig, use_container_width=True)
 
 def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT): 
-     # einen Tag plotten mit 1 Wert/h
+    ''' einen Tag plotten mit 1 Wert/h'''
     fig = px.line(
         df_temp,
         x="uhrzeit",
@@ -387,8 +389,8 @@ def plot_temp_ein_tag(df_temp, datum, temp_grenzwert=TEMP_GRENZWERT):
     st.plotly_chart(fig, use_container_width=True)
 
 def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
-   #textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
-   # und welche Uhrzeiten betroffen waren
+    '''textliche Ausgabe, wie viele Alarme an einem Tag aufgetreten sind 
+   und welche Uhrzeiten betroffen waren'''
 
     df_alarme = get_temp_alarme_ein_tag(df_temp, temp_grenzwert)
 
@@ -406,7 +408,7 @@ def show_temp_alarm_info_ein_tag(df_temp, temp_grenzwert=TEMP_GRENZWERT):
         #sieht nicht schön aus und ist nicht sehr hilfreich
 
 def show_temp_tag_auswahl(temp_liste):
-    # Auswahlbox um einen der letzten 5 Tage anzuschauen
+    ''' Auswahlbox um einen der letzten 5 Tage anzuschauen '''
 
     datum_liste = []
 
@@ -472,8 +474,8 @@ def show_temp_auswertung(patienten_id):
         show_temp_tag_auswahl(temp_liste)
 
 def show_temp_alarmuebersicht():
-    #Zeigt eine Übersicht aller Temperaturalarme aller Patienten mit der summary als Basis
-    # Pro Patient:in und Tag wird eine Zeile angezeigt
+    '''Zeigt eine Übersicht aller Temperaturalarme aller Patienten mit der summary als Basis
+        Pro Patient und Tag wird eine Zeile angezeigt'''
     
     st.subheader("Alarmübersicht")
 
@@ -541,7 +543,8 @@ def show_temp_alarmuebersicht():
         )
 
 def anzeige_arzt():
-    #die Funktion ist wichtig, da sie die Schnittstelle zur main.py darstellt
+    '''die Funktion ist wichtig, da sie die Schnittstelle zur main.py darstellt'''
+    
     tab_patienten,tab_alarme = st.tabs(["Patient:innen", "Alarmübersicht"])
     
     with tab_patienten:
