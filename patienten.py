@@ -38,16 +38,6 @@ class Person:
         image = Image.open(self.foto)
         return image
 
-    """ def load_by_id(self, id):
-        '''Sucht anhand der Patienten-ID das passende Person-Objekt.'''
-        persons = get_person_data()
-
-        for person in persons:
-            if person.id == id:
-                return person
-
-        return None"""
-
     def calc_age(self):
         '''Berechnet das Alter der Patient:in.'''
         geburtsjahr = int(self.geburtsdatum.split("-")[0])
