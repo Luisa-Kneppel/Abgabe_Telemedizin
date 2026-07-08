@@ -34,13 +34,21 @@ Die bereits angelegten Passwörter für die verschiedenen Personen sind hier auf
 Benutzer	    Passwort
 
 arzt	        arzt123
+
 marie.mueller	marie123
+
 anna.schmidt	anna123
+
 lukas.weber	    lukas123
+
 laura.fischer	laura123
+
 jonas.keller	jonas123
+
 thomas.becker	thomas123
+
 sophie.hoffmann	sophie123
+
 jonas.wagner	jonas123
 
 Read_data:
