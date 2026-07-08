@@ -38,7 +38,7 @@ class Person:
         image = Image.open(self.foto)
         return image
 
-    def load_by_id(self, id):
+    """ def load_by_id(self, id):
         '''Sucht anhand der Patienten-ID das passende Person-Objekt.'''
         persons = get_person_data()
 
@@ -46,7 +46,7 @@ class Person:
             if person.id == id:
                 return person
 
-        return None
+        return None"""
 
     def calc_age(self):
         '''Berechnet das Alter der Patient:in.'''
@@ -251,9 +251,16 @@ def show_patient(patient_id):
     st.divider()
     st.subheader("Dateien hochladen")
 
+    if "uploader_key" not in st.session_state:
+        st.session_state.uploader_key = 0
+    if st.session_state.get("upload_erfolgreich"):
+        st.success(st.session_state["upload_erfolgreich"])
+        del st.session_state["upload_erfolgreich"]
+
     datei = st.file_uploader(
         "CSV-Datei auswählen",
-        type=["csv"]
+        type=["csv"],
+        key=f"uploader_{st.session_state.uploader_key}"
     )
 
     if datei is not None:
@@ -261,7 +268,10 @@ def show_patient(patient_id):
             erfolgreich, meldung = add_datei(patient.id, datei)
 
             if erfolgreich:
-                st.success(meldung)
+                st.session_state.upload_erfolgreich = meldung
+                st.session_state.uploader_key += 1
+                st.rerun()
+
             else:
                 st.error(meldung)
 

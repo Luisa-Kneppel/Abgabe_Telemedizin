@@ -3,9 +3,9 @@
         "id": 1,
         "nachname": "Müller",
         "vorname": "Marie",
-        "foto": "data/pictures/Mueller_Marie.png",
+        "foto": "data/pictures/patient_1.png",
         "geburtsdatum": "1985-04-17",
-        "telefon": "0171-1234567",
+        "telefon": "0171-1234568",
         "adresse": {
             "strasse": "Hauptstrasse 15",
             "plz": "76131",

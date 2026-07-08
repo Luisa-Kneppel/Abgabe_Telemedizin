@@ -54,5 +54,13 @@
         "titel": "Bitte Rückmeldung",
         "text": "Bitte geben Sie uns eine kurze Rückmeldung, ob die Beschwerden weiterhin bestehen.",
         "gelesen": false
+    },
+    {
+        "patienten_id": 1,
+        "patient": "Marie Müller",
+        "datum": "2026-07-08",
+        "titel": "Änderung Medizinische Daten",
+        "text": "Ihre medizinischen Daten wurden durch Ihre Ärztin bzw. Ihren Arzt aktualisiert. Bitte überprüfen Sie die Änderungen in Ihrem Patientenbereich. Wenden Sie sich bei Fragen an Ihre Ärztin bzw. Ihren Arzt.",
+        "gelesen": false
     }
 ]
