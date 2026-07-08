@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-from read_data import load_person_data, update_patienten_daten, get_mitteilungen, add_datei
+from read_data import load_person_data, update_patienten_daten, get_mitteilungen, add_datei, mitteilung_gelesen
 from datetime import datetime
 
 class Person:
@@ -288,6 +288,7 @@ def show_mitteilungen(patient_id):
                     st.caption(mitteilung["datum"])
                 with oeffnen:
                     if st.button(">", key=nummer):
+                        mitteilung_gelesen(patient_id, mitteilung["datum"], mitteilung["titel"])
                         st.session_state.ausgewaehlte_mitteilung = mitteilung
                         st.rerun()
         st.divider()

@@ -290,3 +290,17 @@ def get_mitteilungen(patienten_id):
         if mitteilung["patienten_id"] == patienten_id:
             patient_mitteilungen.append(mitteilung)
     return patient_mitteilungen
+
+def mitteilung_gelesen(patienten_id, datum, titel):
+    '''Markiert eine Mitteilung als gelesen.'''
+    mitteilungen = load_mitteilungen()
+
+    for mitteilung in mitteilungen:
+        if (mitteilung["patienten_id"] == patienten_id
+            and mitteilung["datum"] == datum
+            and mitteilung["titel"] == titel):
+            mitteilung["gelesen"] =True
+            break
+
+    with open("data/mitteilungen.json", "w", encoding="utf-8") as file:
+        json.dump(mitteilungen, file, indent=4, ensure_ascii=False)

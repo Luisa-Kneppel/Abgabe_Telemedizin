@@ -37,7 +37,12 @@ with st.sidebar:
                     patient = user["patienten_id"]
                     break
 
-            anzahl = len(get_mitteilungen(patient))
+            mitteilungen = get_mitteilungen(patient)
+            anzahl = 0
+
+            for mitteilung in mitteilungen:
+                if not mitteilung["gelesen"]:
+                    anzahl += 1
 
             if st.button(f"Mitteilungen({anzahl})"):
                 st.session_state.patienten_ansicht = "mitteilungen"
