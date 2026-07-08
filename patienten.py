@@ -284,8 +284,13 @@ def show_mitteilungen(patient_id):
             with st.container(border=True):
                 nachricht, oeffnen = st.columns([5,1])
                 with nachricht:
-                    st.write("**" + mitteilung["titel"] + "**")
+                    if mitteilung["gelesen"]:
+                        st.write(mitteilung["titel"])
+                    else:
+                        st.write("**" + mitteilung["titel"] + "**")
+
                     st.caption(mitteilung["datum"])
+                
                 with oeffnen:
                     if st.button(">", key=nummer):
                         mitteilung_gelesen(patient_id, mitteilung["datum"], mitteilung["titel"])
